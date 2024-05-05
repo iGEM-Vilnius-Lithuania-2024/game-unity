@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mapbox.Unity.Location;
+using Mapbox.Utils;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -20,11 +23,12 @@ public class CaptureClassifier : MonoBehaviour
     private ARRaycastManager _arRaycastManager;
     private bool _placementPoseIsValid;
     private bool _takeScreenshotOnNextFrame;
-    
+
     private void Start() {
         _arRaycastManager = FindObjectOfType<ARRaycastManager>();
         _camera = gameObject.GetComponent<Camera>();
         Button btn = scanButton.GetComponent<Button>();
+        btn.onClick.AddListener(SaveScanInfo);
         btn.onClick.AddListener(CaptureRectangle);
     }
 
@@ -57,6 +61,11 @@ public class CaptureClassifier : MonoBehaviour
             _camera.targetTexture = RenderTexture.GetTemporary(WIDTH, WIDTH, 100);
             _takeScreenshotOnNextFrame = true;
         }
+    }
+    
+    private void SaveScanInfo()
+    {
+        SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
     }
     
     private void UpdatePlacementIndicator() {

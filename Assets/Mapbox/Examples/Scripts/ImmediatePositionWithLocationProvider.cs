@@ -1,4 +1,4 @@
-﻿namespace Mapbox.Examples
+﻿namespace Mapbox.Examples.Scripts
 {
 	using Mapbox.Unity.Location;
 	using Mapbox.Unity.Map;

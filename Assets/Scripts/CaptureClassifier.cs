@@ -12,7 +12,7 @@ public class CaptureClassifier : MonoBehaviour
     public string certFilePath = "Assets/Scripts/certs/igem-game-client.pfx";
     public string certPassword = "A0RRpnUoTMtPw2ROGK6o";
     public string caCertFilePath = "Assets/Scripts/certs/igem-game-ca.crt";
-    public string url = "https://127.0.0.1:443";
+    public string url = "https://178.128.136.164";
     public Button scanButton;
     public GameObject spinner;
 
@@ -25,7 +25,6 @@ public class CaptureClassifier : MonoBehaviour
     {
         _camera = gameObject.GetComponent<Camera>();
         Button btn = scanButton.GetComponent<Button>();
-        btn.onClick.AddListener(SaveScanInfo);
         btn.onClick.AddListener(CaptureRectangle);
     }
 
@@ -57,14 +56,6 @@ public class CaptureClassifier : MonoBehaviour
         {
             _camera.targetTexture = RenderTexture.GetTemporary(WIDTH, WIDTH, 100);
             _takeScreenshotOnNextFrame = true;
-        }
-    }
-
-    private void SaveScanInfo()
-    {
-        if (Application.internetReachability != NetworkReachability.NotReachable)
-        {
-            SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
         }
     }
 

@@ -182,7 +182,7 @@ RectTransform:
   m_GameObject: {fileID: 246241103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1253873701}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 273381185}
   - component: {fileID: 273381184}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: GuidanceMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,7 +765,6 @@ GameObject:
   - component: {fileID: 944558528}
   - component: {fileID: 944558527}
   - component: {fileID: 944558526}
-  - component: {fileID: 944558530}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -860,18 +859,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &944558530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 944558525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2862a806a0c1f8645887baf41915ab25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1043127001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,7 +2261,7 @@ RectTransform:
   m_GameObject: {fileID: 1893198903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1253873703}
@@ -2349,7 +2336,7 @@ RectTransform:
   m_GameObject: {fileID: 2012459634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1253873702}

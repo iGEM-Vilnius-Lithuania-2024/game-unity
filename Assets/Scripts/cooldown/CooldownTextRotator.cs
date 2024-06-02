@@ -9,7 +9,6 @@ public class CooldownTextRotator : MonoBehaviour
     }
     
     void Update() {
-        Debug.Log(-_playerTransform.rotation.eulerAngles.y);
         float playerYRotation = _playerTransform.rotation.eulerAngles.y;
         transform.rotation = Quaternion.Euler(90, 0, -playerYRotation);
     }

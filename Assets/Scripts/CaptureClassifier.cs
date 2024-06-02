@@ -53,13 +53,19 @@ public class CaptureClassifier : MonoBehaviour
 
     private void CaptureRectangle()
     {
-        _camera.targetTexture = RenderTexture.GetTemporary(WIDTH, WIDTH, 100);
-        _takeScreenshotOnNextFrame = true;
+        if (Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            _camera.targetTexture = RenderTexture.GetTemporary(WIDTH, WIDTH, 100);
+            _takeScreenshotOnNextFrame = true;
+        }
     }
 
     private void SaveScanInfo()
     {
-        SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
+        if (Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
+        }
     }
 
     private async Task IdentifySurfaceAndSpawnObject(byte[] data)

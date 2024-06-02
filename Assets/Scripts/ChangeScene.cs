@@ -1,3 +1,4 @@
+using System.Collections;
 using Mapbox.Unity.Location;
 using Mapbox.Utils;
 using UnityEngine;
@@ -5,7 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    ILocationProvider _locationProvider;
+    private ILocationProvider _locationProvider;
+    
+    public GameObject onCooldownDialog;
+
     ILocationProvider LocationProvider
     {
         get
@@ -21,19 +25,25 @@ public class ChangeScene : MonoBehaviour
     
     public void MoveToScene(int sceneId)
     {
-        SceneManager.LoadSceneAsync(sceneId);
+        if (Application.internetReachability != NetworkReachability.NotReachable && SceneManager.GetActiveScene().buildIndex != sceneId)
+        {
+            SceneManager.LoadSceneAsync(sceneId);
+        }
     }
     
     public void MoveToSceneWithScanInfo(int sceneId)
     {
-        if (IsOnCooldown())
+        if (Application.internetReachability != NetworkReachability.NotReachable && SceneManager.GetActiveScene().buildIndex != sceneId)
         {
-            Debug.LogError("You are on cooldown.");
-        }
-        else
-        {
-            ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
-            SceneManager.LoadSceneAsync(sceneId);   
+            if (IsOnCooldown())
+            {
+                StartCoroutine(OpenCloseDialog(onCooldownDialog));
+            }
+            else
+            {
+                ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
+                SceneManager.LoadSceneAsync(sceneId);
+            }
         }
     }
     
@@ -55,5 +65,12 @@ public class ChangeScene : MonoBehaviour
             }
         }
         return false;
+    }
+    
+    IEnumerator OpenCloseDialog(GameObject dialog)
+    {
+        dialog.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        dialog.SetActive(false);
     }
 }

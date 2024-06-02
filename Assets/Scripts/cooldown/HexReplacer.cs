@@ -12,7 +12,7 @@ public class HexReplacer : MonoBehaviour
     private List<Vector3> positionsToReplace = new List<Vector3>();
     private List<DateTime> scanTimes = new List<DateTime>();
     private bool isInitialized = false;
-    private TimeSpan cooldownTime = TimeSpan.FromSeconds(30);
+    private TimeSpan cooldownTime = TimeSpan.FromSeconds(300);
 
     void Start()
     {
@@ -83,7 +83,7 @@ public class HexReplacer : MonoBehaviour
             timer.timeRemaining = timeRemaining;
             
             Cooldown cooldown = replacementPrefab.GetComponent<Cooldown>();
-            cooldown.cooldownTime = timeRemaining;
+            cooldown.SetRemainingTime(timeRemaining);
             
             if (timeRemaining >= 0)
             {

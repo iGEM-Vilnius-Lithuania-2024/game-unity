@@ -14,7 +14,6 @@ public class Cooldown : MonoBehaviour
 
     public void SetRemainingTime(float time)
     {
-        Debug.Log(time);
         _remainingTime = time;
         cooldownImage.fillAmount = _remainingTime / 300f;
     }

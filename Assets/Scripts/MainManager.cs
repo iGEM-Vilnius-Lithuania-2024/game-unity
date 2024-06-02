@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
@@ -16,5 +18,17 @@ public class MainManager : MonoBehaviour
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+    
+    public void SwitchMapScene()
+    {
+        StartCoroutine(SwitchMapSceneAfterDelay());
+    }
+    
+    private IEnumerator SwitchMapSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(5f);
+
+        SceneManager.LoadScene(0);
     }
 }

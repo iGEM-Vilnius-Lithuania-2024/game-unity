@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
+using TMPro;
 
 public class BattleManager : MonoBehaviour
 {
@@ -10,6 +9,11 @@ public class BattleManager : MonoBehaviour
     public GameObject skinBacteria;
     public GameObject waterBacteria;
     public GameObject woodBacteria;
+    public GameObject moveToSpawnDialog;
+    public GameObject battleButton;
+    public GameObject runButton;
+    public GameObject infoDialog;
+    public GameObject infoDialogText;
     
     private GameObject _spawnedObject;
     private Pose _placementPose;
@@ -29,9 +33,11 @@ public class BattleManager : MonoBehaviour
         UpdatePlacementPose();
         if (_placementPoseIsValid && !_isObjectSpawned)
         {
-            SpawnObject();
+            battleButton.SetActive(true);
+            runButton.SetActive(true);
+            moveToSpawnDialog.SetActive(false);
             _isObjectSpawned = true;
-            StartCoroutine(SwitchSceneAfterDelay());
+            SpawnObject();
         }
     }
 
@@ -61,20 +67,26 @@ public class BattleManager : MonoBehaviour
         {
             case Surface.Skin:
                 ARPlaceObject(skinBacteria);
+                SetInfoDialogText("\nCorynebacterium loves to call the <b>skin</b> its home, especially in warm, moist areas. It is like the friendly neighbor of your skin's microbiome, helping to keep harmful bacteria in check.");
                 break;
             case Surface.Water:
                 ARPlaceObject(waterBacteria);
+                SetInfoDialogText("\nShigella loves to hang out in contaminated <b>water</b>, especially where sanitation isn't the best. It is a sneaky bacteria that can cause quite a tummy upset.");
                 break;
             case Surface.Wood:
                 ARPlaceObject(woodBacteria);
+                SetInfoDialogText("\nLiberibacter is commonly found lurking in <b>wood</b>, especially in trees and plants. It is a mischievous bacteria that can cause serious trouble for plants, like the infamous citrus greening disease.");
                 break;
         }
     }
     
-    IEnumerator SwitchSceneAfterDelay()
+    private void SetInfoDialogText(string newText)
     {
-        yield return new WaitForSeconds(5f);
-        
-        SceneManager.LoadScene(0);
+        infoDialog.SetActive(true);
+        TextMeshProUGUI childText = infoDialogText.GetComponentInChildren<TextMeshProUGUI>();
+        if (childText != null)
+        {
+            childText.text = newText;
+        }
     }
 }

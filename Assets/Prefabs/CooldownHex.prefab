@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2647215982636486541}
-  timeRemaining: 10
+  timeRemaining: 300
 --- !u!114 &5152145821374416944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,4 +471,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownImage: {fileID: 3477603414930146395}
-  cooldownTime: 10
+  cooldownTime: 300

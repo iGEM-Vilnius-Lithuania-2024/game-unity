@@ -4,15 +4,18 @@ using Image = UnityEngine.UI.Image;
 public class Cooldown : MonoBehaviour
 {
     public Image cooldownImage;
-    public float cooldownTime = 10f;
+    private float _remainingTime = 300f;
     
-    void Start()
-    {
-        cooldownImage.fillAmount = 1;
-    }
     
     void Update()
     {
-        cooldownImage.fillAmount -= 1 / cooldownTime * Time.deltaTime;
+        cooldownImage.fillAmount -= 1 / 300f * Time.deltaTime;
+    }
+
+    public void SetRemainingTime(float time)
+    {
+        Debug.Log(time);
+        _remainingTime = time;
+        cooldownImage.fillAmount = _remainingTime / 300f;
     }
 }

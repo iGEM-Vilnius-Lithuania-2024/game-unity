@@ -1,9 +1,11 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Mapbox.Utils;
 using UnityEngine;
+using File = OpenCover.Framework.Model.File;
 
 public static class SaveSystem
 {
@@ -48,6 +50,38 @@ public static class SaveSystem
         {
             Debug.LogError("Save file not found in " + path);
             return new List<ScanInfo>();
+        }
+    }
+    
+    public static void SavePlayerInfo(float currentHealth)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/playerInfo.json";
+        
+        PlayerInfo playerInfo = new PlayerInfo(DateTime.Now, currentHealth);
+
+        using (FileStream stream = new FileStream(path, FileMode.Create))
+        {
+            formatter.Serialize(stream, playerInfo);
+        }
+    }
+    
+    public static PlayerInfo LoadPlayerInfo()
+    {
+        string path = Application.persistentDataPath + "/playerInfo.json";
+
+        if (System.IO.File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                PlayerInfo playerInfo = formatter.Deserialize(stream) as PlayerInfo;
+                return playerInfo;
+            }
+        }
+        else
+        {
+            return new PlayerInfo(DateTime.Now, 100);
         }
     }
 }

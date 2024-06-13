@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using TMPro;
 
-public class BattleManager : MonoBehaviour
+public class PreBattleManager : MonoBehaviour
 {
     
     public GameObject skinBacteria;

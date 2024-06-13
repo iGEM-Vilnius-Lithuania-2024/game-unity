@@ -49,6 +49,9 @@ public class Bacteria : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(5);
+            
+            // TODO: Deal damage animation
+            
             player.TakeDamage(damage);
         }
     }

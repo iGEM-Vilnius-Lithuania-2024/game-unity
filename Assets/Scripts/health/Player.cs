@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public float pointIncreasePerMinute = 1;
 
     public HealthBar healthBar;
+    
+    private float saveInterval = 60f;
+    private float saveTimer;
     void Start()
     {
         PlayerInfo playerInfo = SaveSystem.LoadPlayerInfo();
@@ -18,6 +21,8 @@ public class Player : MonoBehaviour
         
         healthBar.SetMaxHealth(maxHealth);
         healthBar.SetHealth(currentHealth);
+        
+        saveTimer = saveInterval;
     }
     
     void Update()
@@ -29,13 +34,25 @@ public class Player : MonoBehaviour
             currentHealth = maxHealth;
         }
 
-        if (currentHealth < 0)
+        if (currentHealth <= 0f)
         {
             currentHealth = 0;
+            
+            // TODO: Show lose screen
+            
+            SaveSystem.SavePlayerInfo(currentHealth + 1);
+            SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
+            MainManager.Instance.SwitchMapScene();
         }
         
         healthBar.SetHealth(currentHealth);
-        SaveSystem.SavePlayerInfo(currentHealth);
+        
+        saveTimer -= Time.deltaTime;
+        if (saveTimer <= 0f)
+        {
+            SaveSystem.SavePlayerInfo(currentHealth);
+            saveTimer = saveInterval;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -43,5 +60,6 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+        SaveSystem.SavePlayerInfo(currentHealth);
     }
 }

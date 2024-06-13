@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BattleSceneManager : MonoBehaviour
+public class PreBattleSceneManager : MonoBehaviour
 {
 
     public GameObject battleButton;
@@ -14,13 +14,17 @@ public class BattleSceneManager : MonoBehaviour
     {
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
-            infoDialog.SetActive(false);
-            guidanceDialog.SetActive(true);
-            SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
-            MainManager.Instance.SwitchMapScene();
-            battleButton.SetActive(false);
-            runButton.SetActive(false);
+            SceneManager.LoadSceneAsync(3);
         }
+        // if (Application.internetReachability != NetworkReachability.NotReachable)
+        // {
+        //     infoDialog.SetActive(false);
+        //     guidanceDialog.SetActive(true);
+        //     SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
+        //     MainManager.Instance.SwitchMapScene();
+        //     battleButton.SetActive(false);
+        //     runButton.SetActive(false);
+        // }
     }
 
     public void Run()

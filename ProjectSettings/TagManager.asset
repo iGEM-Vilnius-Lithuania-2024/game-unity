@@ -7,6 +7,12 @@ TagManager:
   - hex
   - cooldown-hex
   - spinner
+  - bacteria
+  - target
+  - line
+  - aim
+  - victory
+  - lose
   layers:
   - Default
   - TransparentFX

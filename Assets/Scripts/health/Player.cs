@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     
     private float saveInterval = 60f;
     private float saveTimer;
+    private GameObject lose;
     void Start()
     {
         PlayerInfo playerInfo = SaveSystem.LoadPlayerInfo();
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
         {
             currentHealth = 0;
             
-            // TODO: Show lose screen
+            GameObject.FindGameObjectWithTag("lose").transform.position = new Vector3(2, 0, 0);
             
             SaveSystem.SavePlayerInfo(currentHealth + 1);
             SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);

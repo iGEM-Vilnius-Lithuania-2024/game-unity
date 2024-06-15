@@ -10,9 +10,13 @@ public class Bacteria : MonoBehaviour
     
     public Player player;
     public HealthBar healthBar;
+    
+    private GameObject victory;
 
     void Start()
     {
+        victory = GameObject.FindWithTag("victory");
+        victory.SetActive(false);
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         player = GameObject.Find("Player").GetComponent<Player>();
@@ -58,12 +62,16 @@ public class Bacteria : MonoBehaviour
 
     void Die()
     {
+        GameObject.FindWithTag("target").Destroy();
+        GameObject.FindWithTag("line").Destroy();
+        GameObject.FindWithTag("aim").Destroy();
+        
         // TODO: Die animation
         
-        // TODO: Victory screen
+        victory.SetActive(true);
         
         gameObject.transform.parent.gameObject.SetActive(false);
         SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
         MainManager.Instance.SwitchMapScene();
-    }
+    } 
 }

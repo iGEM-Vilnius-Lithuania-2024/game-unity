@@ -6,9 +6,12 @@ public class BattleManager : MonoBehaviour
     public GameObject skinBacteria;
     public GameObject waterBacteria;
     public GameObject woodBacteria;
-    public GameObject skinBackground;
-    public GameObject waterBackground;
-    public GameObject woodBackground;
+    public GameObject skinBackgroundVertical;
+    public GameObject skinBackgroundHorizontal;
+    public GameObject waterBackgroundVertical;
+    public GameObject waterBackgroundHorizontal;
+    public GameObject woodBackgroundVertical;
+    public GameObject woodBackgroundHorizontal;
     
     private GameObject _spawnedObject;
 
@@ -23,13 +26,11 @@ public class BattleManager : MonoBehaviour
         _spawnedObject.transform.localScale = new Vector3(2000, 2000, 2000);
     }
     
-    private void PlaceBackground(GameObject objectToSpawn)
+    private void PlaceBackground(GameObject vGameObject, GameObject hGameObject)
     {
-        _spawnedObject = Instantiate(objectToSpawn, new Vector3(25, 0, 130), new Quaternion(0f, 0f, 0f, 1f));
-        _spawnedObject.transform.rotation = Quaternion.Euler(90, 0, 0);
-        Instantiate(objectToSpawn, new Vector3(25, 0, 390), new Quaternion(0f, 0f, 0f, 1f));
+        Instantiate(vGameObject);
+        Instantiate(hGameObject);
     }
-
     
     private void SpawnObjects()
     {
@@ -37,15 +38,15 @@ public class BattleManager : MonoBehaviour
         {
             case Surface.Skin:
                 PlaceBacteria(skinBacteria);
-                PlaceBackground(skinBackground);
+                PlaceBackground(skinBackgroundVertical, skinBackgroundHorizontal);
                 break;
             case Surface.Water:
                 PlaceBacteria(waterBacteria);
-                PlaceBackground(waterBackground);
+                PlaceBackground(waterBackgroundVertical, waterBackgroundHorizontal);
                 break;
             case Surface.Wood:
                 PlaceBacteria(woodBacteria);
-                PlaceBackground(woodBackground);
+                PlaceBackground(woodBackgroundVertical, woodBackgroundHorizontal);
                 break;
         }
     }

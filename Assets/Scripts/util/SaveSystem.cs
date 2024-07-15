@@ -5,7 +5,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Mapbox.Utils;
 using UnityEngine;
-using File = OpenCover.Framework.Model.File;
 
 public static class SaveSystem
 {

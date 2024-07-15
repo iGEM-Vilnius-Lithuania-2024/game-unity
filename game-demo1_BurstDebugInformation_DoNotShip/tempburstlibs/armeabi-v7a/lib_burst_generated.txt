@@ -23,6 +23,7 @@ Library: C:\Users\Linas\Desktop\iGEM\game-unity\Temp\BurstOutput\tempburstlibs\a
 --assembly-defines=System.Data;
 --assembly-defines=System;
 --assembly-defines=System.Drawing;
+--assembly-defines=System.Net.Http;
 --assembly-defines=System.Numerics;
 --assembly-defines=System.Runtime.Serialization;
 --assembly-defines=System.Xml;
@@ -110,6 +111,7 @@ Library: C:\Users\Linas\Desktop\iGEM\game-unity\Temp\BurstOutput\tempburstlibs\a
 --assembly-defines=System.Data;
 --assembly-defines=System;
 --assembly-defines=System.Drawing;
+--assembly-defines=System.Net.Http;
 --assembly-defines=System.Numerics;
 --assembly-defines=System.Runtime.Serialization;
 --assembly-defines=System.Xml;
@@ -205,6 +207,7 @@ Library: C:\Users\Linas\Desktop\iGEM\game-unity\Temp\BurstOutput\tempburstlibs\a
 --assembly-defines=System.Data;
 --assembly-defines=System;
 --assembly-defines=System.Drawing;
+--assembly-defines=System.Net.Http;
 --assembly-defines=System.Numerics;
 --assembly-defines=System.Runtime.Serialization;
 --assembly-defines=System.Xml;

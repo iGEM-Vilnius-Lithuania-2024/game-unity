@@ -9,6 +9,7 @@ public class SlideTarget : MonoBehaviour
     public GameObject verticalLine;
     public GameObject horizontalLine;
     public GameObject target;
+    public GameObject damagePopup;
 
     private Vector3 topPosition;
     private Vector3 bottomPosition;
@@ -66,6 +67,7 @@ public class SlideTarget : MonoBehaviour
             else
             {
                 float damage = CalculateDamage();
+                PopUpDamage((int)Math.Round(damage, 0), aim.transform.localPosition);
                 GameObject bacteria = GameObject.FindGameObjectWithTag("bacteria");
                 bacteria.transform.GetChild(0).GetComponent<Bacteria>().TakeDamage((int)Math.Round(damage, 0));
                 SpawnAtRandomPosition();
@@ -159,17 +161,25 @@ public class SlideTarget : MonoBehaviour
         Vector3 aimPosition = aim.transform.localPosition;
         Vector3 targetPosition = spawnedObject.transform.localPosition;
         
-        if (aimPosition.x < -targetCanvasReactTransorm.rect.width / 2 || aimPosition.x > targetCanvasReactTransorm.rect.width / 2 ||
-            aimPosition.y < -targetCanvasReactTransorm.rect.height / 2 || aimPosition.y > targetCanvasReactTransorm.rect.height / 2)
+        float distanceFromCenter = Vector3.Distance(aimPosition, Vector3.zero);
+        
+        if (distanceFromCenter > 100)
         {
             return 0;
         }
 
         float distance = Vector3.Distance(aimPosition, targetPosition);
         float maxDistance = Mathf.Sqrt(Mathf.Pow(targetCanvasReactTransorm.rect.width / 2, 2) + Mathf.Pow(targetCanvasReactTransorm.rect.height / 2, 2));
-        
+    
         float normalizedDistance = Mathf.Clamp01(distance / maxDistance);
 
         return Mathf.Lerp(20, 10, normalizedDistance);
+    }
+
+    private void PopUpDamage(int damage, Vector3 aimPosition)
+    {
+        GameObject damagePopupInstance = Instantiate(damagePopup, canvasRectTransform);
+        damagePopupInstance.transform.localPosition = aimPosition;
+        damagePopupInstance.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = damage.ToString();
     }
 }

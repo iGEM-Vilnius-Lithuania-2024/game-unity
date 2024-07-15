@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using Mapbox.Unity.Location;
 using Mapbox.Utils;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +27,12 @@ public class ChangeScene : MonoBehaviour
     
     public void MoveToScene(int sceneId)
     {
+        StartCoroutine(MoveToSceneCoroutine(sceneId));
+    }
+    
+    private IEnumerator MoveToSceneCoroutine(int sceneId)
+    {
+        yield return new WaitForSeconds(0.2f);
         if (Application.internetReachability != NetworkReachability.NotReachable && SceneManager.GetActiveScene().buildIndex != sceneId)
         {
             SceneManager.LoadSceneAsync(sceneId);
@@ -33,6 +41,12 @@ public class ChangeScene : MonoBehaviour
     
     public void MoveToSceneWithScanInfo(int sceneId)
     {
+        StartCoroutine(MoveToSceneWithScanInfoCoroutine(sceneId));
+    }
+    
+    private IEnumerator MoveToSceneWithScanInfoCoroutine(int sceneId)
+    {
+        yield return new WaitForSeconds(0.2f);
         if (Application.internetReachability != NetworkReachability.NotReachable && SceneManager.GetActiveScene().buildIndex != sceneId)
         {
             if (IsOnCooldown())

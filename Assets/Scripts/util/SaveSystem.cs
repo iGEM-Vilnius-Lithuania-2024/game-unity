@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Mapbox.Utils;
 using UnityEngine;
+using Mapbox.Json;
 
 public static class SaveSystem
 {
@@ -52,35 +53,30 @@ public static class SaveSystem
         }
     }
     
-    public static void SavePlayerInfo(float currentHealth)
+    public static void SavePlayerInfo(Player player)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/playerInfo.json";
+        PlayerInfo playerInfo = new PlayerInfo(player);
         
-        PlayerInfo playerInfo = new PlayerInfo(DateTime.Now, currentHealth);
-
-        using (FileStream stream = new FileStream(path, FileMode.Create))
-        {
-            formatter.Serialize(stream, playerInfo);
-        }
+        string jsonString = JsonConvert.SerializeObject(playerInfo);
+        
+        File.WriteAllText(path, jsonString);
     }
     
     public static PlayerInfo LoadPlayerInfo()
     {
         string path = Application.persistentDataPath + "/playerInfo.json";
 
-        if (System.IO.File.Exists(path))
+        if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(path, FileMode.Open))
-            {
-                PlayerInfo playerInfo = formatter.Deserialize(stream) as PlayerInfo;
-                return playerInfo;
-            }
+            string jsonString = File.ReadAllText(path);
+
+            PlayerInfo playerInfo = JsonConvert.DeserializeObject<PlayerInfo>(jsonString);
+            return playerInfo;
         }
         else
         {
-            return new PlayerInfo(DateTime.Now, 100);
+            return new PlayerInfo();
         }
     }
 }

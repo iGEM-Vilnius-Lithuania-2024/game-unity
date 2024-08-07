@@ -1,8 +1,21 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
 {
+    public Player player;
+    
+    public GameObject target;
+    public GameObject verticalLine;
+    public GameObject horizontalLine;
+    public GameObject targetArea;
+    public GameObject aim;
+    
+    public GameObject victoryPopup;
+    public GameObject defeatPopup;
+    
     public GameObject skinBacteria;
     public GameObject waterBacteria;
     public GameObject woodBacteria;
@@ -33,6 +46,8 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
+        victoryPopup.SetActive(false);
+        defeatPopup.SetActive(false);
         SpawnObjects();
     }
     
@@ -85,5 +100,69 @@ public class BattleManager : MonoBehaviour
                 PlaceBackground(pavementBackgroundVertical, pavementBackgroundHorizontal);
                 break;
         }
+    }
+
+    public void PlayerDied()
+    {
+        SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
+        
+        defeatPopup.SetActive(true);
+        MainManager.Instance.SwitchMapScene();
+    }
+    
+    public void BacteriaDied()
+    {
+        SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
+        target.SetActive(false);
+        verticalLine.SetActive(false);
+        horizontalLine.SetActive(false);
+        targetArea.SetActive(false);
+        target.SetActive(false);
+        aim.SetActive(false);
+
+        GiveReward();
+        victoryPopup.SetActive(true);
+    }
+    
+    private void GiveReward()
+    {
+        float random = Random.Range(0.0f, 100.0f);
+        ItemRarity rarity;
+        if (random <= 90.0)
+        {
+            rarity = ItemRarity.Common;
+        } else if (random <= 96.0)
+        {
+            rarity = ItemRarity.Uncommon;
+        } else if (random <= 99.0)
+        {
+            rarity = ItemRarity.Rare;
+        } else if (random <= 99.9)
+        {
+            rarity = ItemRarity.Epic;
+        } else
+        {
+            rarity = ItemRarity.Legendary;
+        }
+        
+        random = Random.Range(0f, 4f);
+        ItemType itemType;
+        if (random <= 1.0)
+        {
+            itemType = ItemType.Type1;
+        } else if (random <= 2.0)
+        {
+            itemType = ItemType.Type2;
+        } else if (random <= 3.0)
+        {
+            itemType = ItemType.Type3;
+        } else
+        {
+            itemType = ItemType.Type4;
+        }
+        
+        Item item = new Item(itemType, rarity);
+        player.giveItem(item);
+        //TODO: Set reward item icon
     }
 }

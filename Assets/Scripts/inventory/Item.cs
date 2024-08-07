@@ -1,5 +1,11 @@
 ﻿public class Item
 {
-    public ItemType type;
-    public ItemRarity rarity;
+    public ItemType type { get; private set; }
+    public ItemRarity rarity { get; private set; }
+
+    public Item(ItemType type, ItemRarity rarity)
+    {
+        this.type = type;
+        this.rarity = rarity;
+    }
 }

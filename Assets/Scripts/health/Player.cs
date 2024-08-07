@@ -11,10 +11,18 @@ public class Player : MonoBehaviour
     public float maxHealth = 100;
     public float currentHealth;
     public float pointIncreasePerMinute = 1;
-    public Item[] items;
+    public float attackDamage = 20;
+    public Item equippedItem1;
+    public Item equippedItem2;
+    public Item equippedItem3;
+    public Item equippedItem4;
+    public List<Item> items;
     
     public GameObject damagePopup;
     public HealthBar healthBar;
+    public GameObject HP;
+    public GameObject ATK;
+    public BattleManager battleManager;
     
     private float saveInterval = 60f;
     private float saveTimer;
@@ -22,16 +30,31 @@ public class Player : MonoBehaviour
     void Start()
     {
         PlayerInfo playerInfo = SaveSystem.LoadPlayerInfo();
-        currentHealth = playerInfo.currentHealth + (float)(DateTime.Now - playerInfo.saveTime).TotalMinutes * pointIncreasePerMinute;
+        PlayerInfoToPlayer(playerInfo);
         
-        healthBar.SetMaxHealth(maxHealth);
-        healthBar.SetHealth(currentHealth);
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetHealth(currentHealth);
+        }
+        
+        if (HP != null && ATK != null)
+        {
+            HP.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(maxHealth, 0)).ToString();
+            ATK.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(attackDamage, 0)).ToString();
+        }
         
         saveTimer = saveInterval;
     }
     
     void Update()
     {
+        if (HP != null && ATK != null)
+        {
+            HP.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(maxHealth, 0)).ToString();
+            ATK.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(attackDamage, 0)).ToString();
+        }
+        
         currentHealth += pointIncreasePerMinute * (Time.deltaTime / 60);
         
         if (currentHealth > maxHealth)
@@ -41,23 +64,33 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0f)
         {
-            currentHealth = 0;
+            currentHealth = 1;
+            SaveSystem.SavePlayerInfo(this);
             
-            GameObject.FindGameObjectWithTag("lose").transform.position = new Vector3(0, 0, 0);
-            
-            SaveSystem.SavePlayerInfo(currentHealth + 1);
-            SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
-            MainManager.Instance.SwitchMapScene();
+            battleManager.PlayerDied();
         }
-        
-        healthBar.SetHealth(currentHealth);
-        
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
+
         saveTimer -= Time.deltaTime;
         if (saveTimer <= 0f)
         {
-            SaveSystem.SavePlayerInfo(currentHealth);
+            SaveSystem.SavePlayerInfo(this);
             saveTimer = saveInterval;
         }
+    }
+
+    private void PlayerInfoToPlayer(PlayerInfo playerInfo)
+    {
+        this.currentHealth = playerInfo.currentHealth + (float)(DateTime.Now - playerInfo.saveTime).TotalMinutes * pointIncreasePerMinute;
+        this.equippedItem1 = playerInfo.equippedItem1;
+        this.equippedItem2 = playerInfo.equippedItem2;
+        this.equippedItem3 = playerInfo.equippedItem3;
+        this.equippedItem4 = playerInfo.equippedItem4;
+        this.items = new List<Item>(playerInfo.items);
     }
 
     public void TakeDamage(float damage)
@@ -66,7 +99,7 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
-        SaveSystem.SavePlayerInfo(currentHealth);
+        SaveSystem.SavePlayerInfo(this);
     }
     
     private void PopUpDamage(int damage)
@@ -77,5 +110,11 @@ public class Player : MonoBehaviour
         var textMeshPro = damagePopupInstance.GetComponentInChildren<TMPro.TextMeshProUGUI>();
         textMeshPro.text = damage.ToString();
         textMeshPro.color = Color.red;
+    }
+    
+    public void giveItem(Item item)
+    {
+        items.Add(item);
+        SaveSystem.SavePlayerInfo(this);
     }
 }

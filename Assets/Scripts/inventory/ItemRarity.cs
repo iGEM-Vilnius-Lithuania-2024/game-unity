@@ -4,5 +4,5 @@
     Uncommon,
     Rare,
     Epic,
-    Legendary,
+    Legendary
 }

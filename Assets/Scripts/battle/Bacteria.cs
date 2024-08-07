@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Bacteria : MonoBehaviour
 {
@@ -10,14 +11,14 @@ public class Bacteria : MonoBehaviour
     
     public Player player;
     public HealthBar healthBar;
-    
-    private GameObject victory;
+    public BattleManager battleManager;
 
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         player = GameObject.Find("Player").GetComponent<Player>();
+        battleManager = GameObject.Find("Battle Manager").GetComponent<BattleManager>();
         StartCoroutine(DealDamageOverTime());
     }
 
@@ -60,25 +61,9 @@ public class Bacteria : MonoBehaviour
 
     void Die()
     {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("target");
-        foreach (GameObject target in targets)
-        {
-            target.Destroy();
-        }
-        GameObject[] lines = GameObject.FindGameObjectsWithTag("line");
-        foreach (GameObject line in lines)
-        {
-            line.Destroy();
-        }
-        GameObject.FindWithTag("aim").Destroy();
-        
         // TODO: Die animation
         
-        victory = GameObject.FindWithTag("victory");
-        victory.transform.position = new Vector3(180, 310, 0);
-        
         gameObject.transform.parent.gameObject.SetActive(false);
-        SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
-        MainManager.Instance.SwitchMapScene();
+        battleManager.BacteriaDied();
     }
 }

@@ -638,7 +638,8 @@ MonoBehaviour:
   currentHealth: 100
   damage: 5
   player: {fileID: 0}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 5655528607306261268}
+  battleManager: {fileID: 0}
 --- !u!1 &7463871821984139964
 GameObject:
   m_ObjectHideFlags: 0

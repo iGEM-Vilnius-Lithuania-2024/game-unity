@@ -2871,10 +2871,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 60
+  currentHealth: 100
   pointIncreasePerMinute: 1
+  attackDamage: 20
   damagePopup: {fileID: 3475364570012284311, guid: afd79b5b23df00449a7b458a77f8643a, type: 3}
   healthBar: {fileID: 1159109641}
+  HP: {fileID: 0}
+  ATK: {fileID: 0}
+  battleManager: {fileID: 0}
 --- !u!4 &1699839447
 Transform:
   m_ObjectHideFlags: 0

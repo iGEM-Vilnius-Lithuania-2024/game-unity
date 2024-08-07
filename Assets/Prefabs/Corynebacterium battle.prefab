@@ -777,3 +777,4 @@ MonoBehaviour:
   damage: 5
   player: {fileID: 0}
   healthBar: {fileID: 3910124985520104875}
+  battleManager: {fileID: 0}

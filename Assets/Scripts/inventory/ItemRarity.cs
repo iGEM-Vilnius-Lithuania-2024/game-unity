@@ -1,8 +1,8 @@
 ﻿public enum ItemRarity
 {
-    Common,
-    Uncommon,
-    Rare,
-    Epic,
-    Legendary
+    Common = 5,
+    Uncommon = 10,
+    Rare = 15,
+    Epic = 20,
+    Legendary = 25
 }

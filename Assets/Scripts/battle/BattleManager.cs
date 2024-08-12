@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
@@ -14,32 +15,27 @@ public class BattleManager : MonoBehaviour
     public GameObject aim;
     
     public GameObject victoryPopup;
+    public Image reward;
     public GameObject defeatPopup;
     
-    public GameObject skinBacteria;
+    public GameObject humanBacteria;
+    public GameObject animalBacteria;
+    public GameObject soilBacteria;
     public GameObject waterBacteria;
-    public GameObject woodBacteria;
-    public GameObject leafBacteria;
-    public GameObject mossBacteria;
-    public GameObject rockBacteria;
-    public GameObject sandBacteria;
-    public GameObject pavementBacteria;
-    public GameObject skinBackgroundVertical;
-    public GameObject skinBackgroundHorizontal;
+    public GameObject plantBacteria;
+    public GameObject foodBacteria;
+    public GameObject humanBackgroundVertical;
+    public GameObject humanBackgroundHorizontal;
+    public GameObject animalBackgroundVertical;
+    public GameObject animalBackgroundHorizontal;
+    public GameObject soilBackgroundVertical;
+    public GameObject soilBackgroundHorizontal;
     public GameObject waterBackgroundVertical;
     public GameObject waterBackgroundHorizontal;
-    public GameObject woodBackgroundVertical;
-    public GameObject woodBackgroundHorizontal;
-    public GameObject leafBackgroundVertical;
-    public GameObject leafBackgroundHorizontal;
-    public GameObject mossBackgroundVertical;
-    public GameObject mossBackgroundHorizontal;
-    public GameObject rockBackgroundVertical;
-    public GameObject rockBackgroundHorizontal;
-    public GameObject sandBackgroundVertical;
-    public GameObject sandBackgroundHorizontal;
-    public GameObject pavementBackgroundVertical;
-    public GameObject pavementBackgroundHorizontal;
+    public GameObject plantBackgroundVertical;
+    public GameObject plantBackgroundHorizontal;
+    public GameObject foodBackgroundVertical;
+    public GameObject foodBackgroundHorizontal;
     
     
     private GameObject _spawnedObject;
@@ -67,37 +63,29 @@ public class BattleManager : MonoBehaviour
     {
         switch (MainManager.Instance.detectedSurface)
         {
-            case Surface.Skin:
-                PlaceBacteria(skinBacteria);
-                PlaceBackground(skinBackgroundVertical, skinBackgroundHorizontal);
+            case Surface.Human:
+                PlaceBacteria(humanBacteria);
+                PlaceBackground(humanBackgroundVertical, humanBackgroundHorizontal);
                 break;
             case Surface.Water:
                 PlaceBacteria(waterBacteria);
                 PlaceBackground(waterBackgroundVertical, waterBackgroundHorizontal);
                 break;
-            case Surface.Wood:
-                PlaceBacteria(woodBacteria);
-                PlaceBackground(woodBackgroundVertical, woodBackgroundHorizontal);
+            case Surface.Animal:
+                PlaceBacteria(animalBacteria);
+                PlaceBackground(animalBackgroundVertical, animalBackgroundHorizontal);
                 break;
-            case Surface.Leaf:
-                PlaceBacteria(leafBacteria);
-                PlaceBackground(leafBackgroundVertical, leafBackgroundHorizontal);
+            case Surface.Soil:
+                PlaceBacteria(soilBacteria);
+                PlaceBackground(soilBackgroundVertical, soilBackgroundHorizontal);
                 break;
-            case Surface.Moss:
-                PlaceBacteria(mossBacteria);
-                PlaceBackground(mossBackgroundVertical, mossBackgroundHorizontal);
+            case Surface.Plant:
+                PlaceBacteria(plantBacteria);
+                PlaceBackground(plantBackgroundVertical, plantBackgroundHorizontal);
                 break;
-            case Surface.Rock:
-                PlaceBacteria(rockBacteria);
-                PlaceBackground(rockBackgroundVertical, rockBackgroundHorizontal);
-                break;
-            case Surface.Sand:
-                PlaceBacteria(sandBacteria);
-                PlaceBackground(sandBackgroundVertical, sandBackgroundHorizontal);
-                break;
-            case Surface.Pavement:
-                PlaceBacteria(pavementBacteria);
-                PlaceBackground(pavementBackgroundVertical, pavementBackgroundHorizontal);
+            case Surface.Food:
+                PlaceBacteria(foodBacteria);
+                PlaceBackground(foodBackgroundVertical, foodBackgroundHorizontal);
                 break;
         }
     }
@@ -149,20 +137,20 @@ public class BattleManager : MonoBehaviour
         ItemType itemType;
         if (random <= 1.0)
         {
-            itemType = ItemType.Type1;
+            itemType = ItemType.Promoter;
         } else if (random <= 2.0)
         {
-            itemType = ItemType.Type2;
+            itemType = ItemType.Genes1;
         } else if (random <= 3.0)
         {
-            itemType = ItemType.Type3;
+            itemType = ItemType.Genes2;
         } else
         {
-            itemType = ItemType.Type4;
+            itemType = ItemType.Ori;
         }
         
         Item item = new Item(itemType, rarity);
         player.giveItem(item);
-        //TODO: Set reward item icon
+        reward.sprite = Resources.Load<Sprite>("items/" + item.type.Name + "_" + item.rarity);
     }
 }

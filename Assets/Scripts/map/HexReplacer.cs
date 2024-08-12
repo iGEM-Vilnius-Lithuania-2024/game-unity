@@ -9,13 +9,16 @@ using Mapbox.Utils;
 public class HexReplacer : MonoBehaviour
 {
     public GameObject replacementPrefab;
+    public Player player;
+    
     private List<Vector3> positionsToReplace = new List<Vector3>();
     private List<DateTime> scanTimes = new List<DateTime>();
     private bool isInitialized = false;
-    private TimeSpan cooldownTime = TimeSpan.FromSeconds(30);
+    private TimeSpan cooldownTime;
 
     void Start()
     {
+        cooldownTime = TimeSpan.FromSeconds(player.cooldown);
         StartCoroutine(InitializationRoutine());
     }
 
@@ -83,7 +86,7 @@ public class HexReplacer : MonoBehaviour
             timer.timeRemaining = timeRemaining;
             
             Cooldown cooldown = replacementPrefab.GetComponent<Cooldown>();
-            cooldown.SetRemainingTime(timeRemaining);
+            cooldown.SetRemainingTime(timeRemaining, (float)cooldownTime.TotalSeconds);
             
             if (timeRemaining >= 0)
             {

@@ -9,13 +9,23 @@ public class ItemManager : MonoBehaviour
         plasmidManager = GameObject.Find("PlasmidManager").GetComponent<PlasmidManager>();
     }
     
-    public void openItemDescription(GameObject item)
+    public void openEquipPopUp(GameObject item)
     {
-        plasmidManager.OpenItemDescription(item);
+        plasmidManager.OpenItemDescription(item, false);
+    }
+    
+    public void openUnequipPopUp(GameObject item)
+    {
+        plasmidManager.OpenItemDescription(item, true);
     }
     
     public void equipItem()
     {
         plasmidManager.EquipItem();
+    }
+    
+    public void unequipItem()
+    {
+        plasmidManager.UnequipItem();
     }
 }

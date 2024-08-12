@@ -1511,6 +1511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   replacementPrefab: {fileID: 8216116606823134970, guid: ffa91285ea20f404da2ca27af818e34e, type: 3}
+  player: {fileID: 1699839446}
 --- !u!1 &1154682805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,6 +2939,7 @@ MonoBehaviour:
   currentHealth: 100
   pointIncreasePerMinute: 1
   attackDamage: 20
+  cooldown: 300
   damagePopup: {fileID: 3475364570012284311, guid: afd79b5b23df00449a7b458a77f8643a, type: 3}
   healthBar: {fileID: 1159109641}
   HP: {fileID: 0}
@@ -3899,6 +3901,6 @@ SceneRoots:
   - {fileID: 843921207}
   - {fileID: 1188978836}
   - {fileID: 1727657514}
+  - {fileID: 1699839447}
   - {fileID: 936370829}
   - {fileID: 2109176828}
-  - {fileID: 1699839447}

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float currentHealth;
     public float pointIncreasePerMinute = 1;
     public float attackDamage = 20;
+    public float cooldown = 300;
     public Item equippedItem1;
     public Item equippedItem2;
     public Item equippedItem3;
@@ -80,6 +81,26 @@ public class Player : MonoBehaviour
         {
             SaveSystem.SavePlayerInfo(this);
             saveTimer = saveInterval;
+        }
+    }
+
+    void applyPerks()
+    {
+        if (equippedItem1 != null)
+        {
+            attackDamage *= 1f + (int)equippedItem1.rarity / 100f;
+        }
+        if (equippedItem2 != null)
+        {
+            maxHealth *= 1f + (int)equippedItem2.rarity / 100f;
+        }
+        if (equippedItem3 != null)
+        {
+            pointIncreasePerMinute *= 1f + (int)equippedItem3.rarity / 100f;
+        }
+        if (equippedItem4 != null)
+        {
+            cooldown *= 1f - (int)equippedItem4.rarity / 100f;
         }
     }
 

@@ -1,12 +1,10 @@
 
 public enum Surface
 {
-    Wood,
-    Skin,
+    Soil,
     Water,
-    Leaf,
-    Moss,
-    Rock,
-    Sand,
-    Pavement,
+    Plant,
+    Food,
+    Human,
+    Animal
 }

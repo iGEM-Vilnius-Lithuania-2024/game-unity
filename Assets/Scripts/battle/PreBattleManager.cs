@@ -5,10 +5,13 @@ using TMPro;
 
 public class PreBattleManager : MonoBehaviour
 {
-    
-    public GameObject skinBacteria;
+    public GameObject humanBacteria;
+    public GameObject animalBacteria;
+    public GameObject soilBacteria;
     public GameObject waterBacteria;
-    public GameObject woodBacteria;
+    public GameObject plantBacteria;
+    public GameObject foodBacteria;
+
     public GameObject moveToSpawnDialog;
     public GameObject battleButton;
     public GameObject runButton;
@@ -65,16 +68,28 @@ public class PreBattleManager : MonoBehaviour
     {
         switch (MainManager.Instance.detectedSurface)
         {
-            case Surface.Skin:
-                ARPlaceObject(skinBacteria);
+            case Surface.Human:
+                ARPlaceObject(humanBacteria);
+                SetInfoDialogText("\nCorynebacterium loves to call the <b>skin</b> its home, especially in warm, moist areas. It is like the friendly neighbor of your skin's microbiome, helping to keep harmful bacteria in check.");
+                break;
+            case Surface.Animal:
+                ARPlaceObject(animalBacteria);
                 SetInfoDialogText("\nCorynebacterium loves to call the <b>skin</b> its home, especially in warm, moist areas. It is like the friendly neighbor of your skin's microbiome, helping to keep harmful bacteria in check.");
                 break;
             case Surface.Water:
                 ARPlaceObject(waterBacteria);
                 SetInfoDialogText("\nShigella loves to hang out in contaminated <b>water</b>, especially where sanitation isn't the best. It is a sneaky bacteria that can cause quite a tummy upset.");
                 break;
-            case Surface.Wood:
-                ARPlaceObject(woodBacteria);
+            case Surface.Plant:
+                ARPlaceObject(plantBacteria);
+                SetInfoDialogText("\nLiberibacter is commonly found lurking in <b>wood</b>, especially in trees and plants. It is a mischievous bacteria that can cause serious trouble for plants, like the infamous citrus greening disease.");
+                break;
+            case Surface.Soil:
+                ARPlaceObject(soilBacteria);
+                SetInfoDialogText("\nShigella loves to hang out in contaminated <b>water</b>, especially where sanitation isn't the best. It is a sneaky bacteria that can cause quite a tummy upset.");
+                break;
+            case Surface.Food:
+                ARPlaceObject(foodBacteria);
                 SetInfoDialogText("\nLiberibacter is commonly found lurking in <b>wood</b>, especially in trees and plants. It is a mischievous bacteria that can cause serious trouble for plants, like the infamous citrus greening disease.");
                 break;
         }

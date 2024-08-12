@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Plasmid Scene.unity
     guid: 81b6e434c9467cf4391214cda1146466
+  - enabled: 1
+    path: Assets/Scenes/Collection Scene.unity
+    guid: 6c9f2498e79a24b5181942cc38438188
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 66687f5e3206546b589deee60bc36a7c, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: f28fc99d6f36e4296825f146b9d30e8f, type: 2}

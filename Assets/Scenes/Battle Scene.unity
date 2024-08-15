@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -475,15 +475,10 @@ MonoBehaviour:
   horizontalLine: {fileID: 345221179}
   targetArea: {fileID: 920736347}
   aim: {fileID: 950652310}
+  battleBacteriaCanvas: {fileID: 3171213305195920719, guid: c254865de6b0e4947a444b54bd2d0850, type: 3}
   victoryPopup: {fileID: 1339688674}
   reward: {fileID: 29866000}
   defeatPopup: {fileID: 383671176}
-  humanBacteria: {fileID: 3335036889427855862, guid: 4b376943753ab8d4e9d51ce3378abc54, type: 3}
-  animalBacteria: {fileID: 3335036889427855862, guid: 4b376943753ab8d4e9d51ce3378abc54, type: 3}
-  soilBacteria: {fileID: 5207973872570944932, guid: 36953a5aa19329e43b3c8d31c79b3009, type: 3}
-  waterBacteria: {fileID: 5207973872570944932, guid: 36953a5aa19329e43b3c8d31c79b3009, type: 3}
-  plantBacteria: {fileID: 8009035006982504568, guid: 47d99281beb5b79439680c2e743c8f35, type: 3}
-  foodBacteria: {fileID: 8009035006982504568, guid: 47d99281beb5b79439680c2e743c8f35, type: 3}
   humanBackgroundVertical: {fileID: 5416185116930125884, guid: 5c930da3118da0346b570fd5ccbeb584, type: 3}
   humanBackgroundHorizontal: {fileID: 2924741775513102193, guid: ed6c17d5f1b66fd42834926ccba579a4, type: 3}
   animalBackgroundVertical: {fileID: 5416185116930125884, guid: 5c930da3118da0346b570fd5ccbeb584, type: 3}
@@ -1494,7 +1489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.0010070801}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.0009765625}
   m_SizeDelta: {x: 0.00018311, y: 0.0019531}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339688676

@@ -19,13 +19,18 @@ public class ItemManager : MonoBehaviour
         plasmidManager.OpenItemDescription(item, true);
     }
     
-    public void equipItem()
+    public void equipItem(int slot)
     {
-        plasmidManager.EquipItem();
+        plasmidManager.EquipItem(slot);
     }
     
     public void unequipItem()
     {
         plasmidManager.UnequipItem();
+    }
+    
+    public void mergeItems()
+    {
+        plasmidManager.MergeItems();
     }
 }

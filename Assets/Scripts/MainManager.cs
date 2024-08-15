@@ -1,4 +1,5 @@
 using System.Collections;
+using bacteria;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     public Surface detectedSurface;
+    public BacteriaInfo selectedBacteria;
 
     private void Awake()
     {

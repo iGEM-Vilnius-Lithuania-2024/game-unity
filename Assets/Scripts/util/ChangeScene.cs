@@ -27,6 +27,18 @@ public class ChangeScene : MonoBehaviour
     
     public void MoveToScene(int sceneId)
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
+            if (IsOnCooldown())
+            {
+                MoveToScanner.canMove = false;
+            }
+            else
+            {
+                MoveToScanner.canMove = true;
+            }
+        }
         StartCoroutine(MoveToSceneCoroutine(sceneId));
     }
     
@@ -41,6 +53,23 @@ public class ChangeScene : MonoBehaviour
     
     public void MoveToSceneWithScanInfo(int sceneId)
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
+            if (IsOnCooldown())
+            {
+                MoveToScanner.canMove = false;
+            }
+            else
+            {
+                MoveToScanner.canMove = true;
+            }
+        }
+        if (!MoveToScanner.canMove && sceneId == 1)
+        {
+            StartCoroutine(OpenCloseDialog(onCooldownDialog));
+            return;
+        }
         StartCoroutine(MoveToSceneWithScanInfoCoroutine(sceneId));
     }
     
@@ -49,15 +78,8 @@ public class ChangeScene : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if (Application.internetReachability != NetworkReachability.NotReachable && SceneManager.GetActiveScene().buildIndex != sceneId)
         {
-            if (IsOnCooldown())
-            {
-                StartCoroutine(OpenCloseDialog(onCooldownDialog));
-            }
-            else
-            {
-                ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
-                SceneManager.LoadSceneAsync(sceneId);
-            }
+            ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
+            SceneManager.LoadSceneAsync(sceneId);
         }
     }
     

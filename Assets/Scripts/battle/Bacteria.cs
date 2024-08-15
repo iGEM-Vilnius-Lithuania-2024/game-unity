@@ -63,7 +63,7 @@ public class Bacteria : MonoBehaviour
     {
         // TODO: Die animation
         
-        gameObject.transform.parent.gameObject.SetActive(false);
+        gameObject.transform.gameObject.SetActive(false);
         battleManager.BacteriaDied();
     }
 }

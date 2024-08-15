@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Mapbox.Utils;
@@ -46,11 +47,9 @@ public static class SaveSystem
                 return scanInfos;
             }
         }
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
-            return new List<ScanInfo>();
-        }
+        
+        Debug.LogError("Save file not found in " + path);
+        return new List<ScanInfo>();
     }
     
     public static void SavePlayerInfo(Player player)
@@ -74,9 +73,41 @@ public static class SaveSystem
             PlayerInfo playerInfo = JsonConvert.DeserializeObject<PlayerInfo>(jsonString);
             return playerInfo;
         }
-        else
+        
+        return new PlayerInfo().Initialize();
+    }
+    
+    public static void SaveCollectionId(int id)
+    {
+        CollectionSave collectionSave = LoadCollection();
+        if (!collectionSave.ids.Contains(id))
         {
-            return new PlayerInfo();
+            collectionSave.ids.Add(id);
+            SaveCollection(collectionSave);
         }
+    }
+    
+    public static void SaveCollection(CollectionSave collection)
+    {
+        string path = Application.persistentDataPath + "/collection.json";
+        
+        string jsonString = JsonConvert.SerializeObject(collection);
+        
+        File.WriteAllText(path, jsonString);
+    }
+    
+    public static CollectionSave LoadCollection()
+    {
+        string path = Application.persistentDataPath + "/collection.json";
+
+        if (File.Exists(path))
+        {
+            string jsonString = File.ReadAllText(path);
+
+            CollectionSave collection = JsonConvert.DeserializeObject<CollectionSave>(jsonString);
+            return collection;
+        }
+        
+        return new CollectionSave();
     }
 }

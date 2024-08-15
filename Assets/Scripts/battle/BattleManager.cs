@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,17 +12,12 @@ public class BattleManager : MonoBehaviour
     public GameObject horizontalLine;
     public GameObject targetArea;
     public GameObject aim;
+    public GameObject battleBacteriaCanvas;
     
     public GameObject victoryPopup;
     public Image reward;
     public GameObject defeatPopup;
     
-    public GameObject humanBacteria;
-    public GameObject animalBacteria;
-    public GameObject soilBacteria;
-    public GameObject waterBacteria;
-    public GameObject plantBacteria;
-    public GameObject foodBacteria;
     public GameObject humanBackgroundVertical;
     public GameObject humanBackgroundHorizontal;
     public GameObject animalBackgroundVertical;
@@ -51,6 +45,14 @@ public class BattleManager : MonoBehaviour
     {
         _spawnedObject = Instantiate(objectToSpawn, new Vector3(0, 50, 100), new Quaternion(0f, 0f, 0f, 1f));
         _spawnedObject.transform.localScale = new Vector3(2000, 2000, 2000);
+        
+        GameObject battleBacteriaCanvasObject = Instantiate(battleBacteriaCanvas);
+        battleBacteriaCanvasObject.transform.SetParent(_spawnedObject.transform, true);
+        battleBacteriaCanvasObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        
+        _spawnedObject.tag = "bacteria";
+        Bacteria bacteriaScript = _spawnedObject.AddComponent<Bacteria>();
+        bacteriaScript.healthBar = battleBacteriaCanvasObject.transform.GetChild(0).GetComponent<HealthBar>();
     }
     
     private void PlaceBackground(GameObject vGameObject, GameObject hGameObject)
@@ -61,30 +63,25 @@ public class BattleManager : MonoBehaviour
     
     private void SpawnObjects()
     {
+        PlaceBacteria(Resources.Load<GameObject>("Bacterias/" + MainManager.Instance.selectedBacteria.name));
         switch (MainManager.Instance.detectedSurface)
         {
             case Surface.Human:
-                PlaceBacteria(humanBacteria);
                 PlaceBackground(humanBackgroundVertical, humanBackgroundHorizontal);
                 break;
             case Surface.Water:
-                PlaceBacteria(waterBacteria);
                 PlaceBackground(waterBackgroundVertical, waterBackgroundHorizontal);
                 break;
             case Surface.Animal:
-                PlaceBacteria(animalBacteria);
                 PlaceBackground(animalBackgroundVertical, animalBackgroundHorizontal);
                 break;
             case Surface.Soil:
-                PlaceBacteria(soilBacteria);
                 PlaceBackground(soilBackgroundVertical, soilBackgroundHorizontal);
                 break;
             case Surface.Plant:
-                PlaceBacteria(plantBacteria);
                 PlaceBackground(plantBackgroundVertical, plantBackgroundHorizontal);
                 break;
             case Surface.Food:
-                PlaceBacteria(foodBacteria);
                 PlaceBackground(foodBackgroundVertical, foodBackgroundHorizontal);
                 break;
         }
@@ -101,6 +98,7 @@ public class BattleManager : MonoBehaviour
     public void BacteriaDied()
     {
         SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
+        SaveSystem.SaveCollectionId(MainManager.Instance.selectedBacteria.id);
         target.SetActive(false);
         verticalLine.SetActive(false);
         horizontalLine.SetActive(false);
@@ -115,42 +113,42 @@ public class BattleManager : MonoBehaviour
     private void GiveReward()
     {
         float random = Random.Range(0.0f, 100.0f);
-        ItemRarity rarity;
+        int rarity;
         if (random <= 90.0)
         {
-            rarity = ItemRarity.Common;
+            rarity = 0;
         } else if (random <= 96.0)
         {
-            rarity = ItemRarity.Uncommon;
+            rarity = 1;
         } else if (random <= 99.0)
         {
-            rarity = ItemRarity.Rare;
-        } else if (random <= 99.9)
-        {
-            rarity = ItemRarity.Epic;
+            rarity = 2;
         } else
         {
-            rarity = ItemRarity.Legendary;
+            rarity = 3;
         }
         
-        random = Random.Range(0f, 4f);
-        ItemType itemType;
+        random = Random.Range(0f, 5f);
+        int itemType;
         if (random <= 1.0)
         {
-            itemType = ItemType.Promoter;
+            itemType = 0;
         } else if (random <= 2.0)
         {
-            itemType = ItemType.Genes1;
+            itemType = 1;
         } else if (random <= 3.0)
         {
-            itemType = ItemType.Genes2;
+            itemType = 2;
+        } else if (random <= 4.0)
+        {
+            itemType = 3;
         } else
         {
-            itemType = ItemType.Ori;
+            itemType = 4;
         }
         
-        Item item = new Item(itemType, rarity);
-        player.giveItem(item);
-        reward.sprite = Resources.Load<Sprite>("items/" + item.type.Name + "_" + item.rarity);
+        ItemKey newItem = new ItemKey(new Tuple<int, int>(itemType, rarity), false, -1);
+        player.giveItem(newItem);
+        reward.sprite = Resources.Load<Sprite>(Items.items[newItem.id].iconPath);
     }
 }

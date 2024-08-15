@@ -115,42 +115,42 @@ public class BattleManager : MonoBehaviour
     private void GiveReward()
     {
         float random = Random.Range(0.0f, 100.0f);
-        ItemRarity rarity;
+        int rarity;
         if (random <= 90.0)
         {
-            rarity = ItemRarity.Common;
+            rarity = 0;
         } else if (random <= 96.0)
         {
-            rarity = ItemRarity.Uncommon;
+            rarity = 1;
         } else if (random <= 99.0)
         {
-            rarity = ItemRarity.Rare;
-        } else if (random <= 99.9)
-        {
-            rarity = ItemRarity.Epic;
+            rarity = 2;
         } else
         {
-            rarity = ItemRarity.Legendary;
+            rarity = 3;
         }
         
-        random = Random.Range(0f, 4f);
-        ItemType itemType;
+        random = Random.Range(0f, 5f);
+        int itemType;
         if (random <= 1.0)
         {
-            itemType = ItemType.Promoter;
+            itemType = 0;
         } else if (random <= 2.0)
         {
-            itemType = ItemType.Genes1;
+            itemType = 1;
         } else if (random <= 3.0)
         {
-            itemType = ItemType.Genes2;
+            itemType = 2;
+        } else if (random <= 4.0)
+        {
+            itemType = 3;
         } else
         {
-            itemType = ItemType.Ori;
+            itemType = 4;
         }
         
-        Item item = new Item(itemType, rarity);
-        player.giveItem(item);
-        reward.sprite = Resources.Load<Sprite>("items/" + item.type.Name + "_" + item.rarity);
+        ItemKey newItem = new ItemKey(new Tuple<int, int>(itemType, rarity), false, -1);
+        player.giveItem(newItem);
+        reward.sprite = Resources.Load<Sprite>(Items.items[newItem.id].iconPath);
     }
 }

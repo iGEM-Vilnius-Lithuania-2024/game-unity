@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,16 +14,12 @@ public class Player : MonoBehaviour
     public float pointIncreasePerMinute = 1;
     public float attackDamage = 20;
     public float cooldown = 300;
-    public Item equippedItem1;
-    public Item equippedItem2;
-    public Item equippedItem3;
-    public Item equippedItem4;
-    public List<Item> items;
+    public List<ItemKey> items;
     
     public GameObject damagePopup;
     public HealthBar healthBar;
-    public GameObject HP;
-    public GameObject ATK;
+    public TMP_Text HP;
+    public TMP_Text ATK;
     public BattleManager battleManager;
     
     private float saveInterval = 60f;
@@ -32,6 +29,9 @@ public class Player : MonoBehaviour
     {
         PlayerInfo playerInfo = SaveSystem.LoadPlayerInfo();
         PlayerInfoToPlayer(playerInfo);
+        applyPerks();
+        
+        SaveSystem.SavePlayerInfo(this);
         
         if (healthBar != null)
         {
@@ -41,8 +41,8 @@ public class Player : MonoBehaviour
         
         if (HP != null && ATK != null)
         {
-            HP.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(maxHealth, 0)).ToString();
-            ATK.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(attackDamage, 0)).ToString();
+            HP.text = ((int) Math.Round(maxHealth, 0)).ToString();
+            ATK.text = ((int) Math.Round(attackDamage, 0)).ToString();
         }
         
         saveTimer = saveInterval;
@@ -75,43 +75,42 @@ public class Player : MonoBehaviour
         {
             healthBar.SetHealth(currentHealth);
         }
-
-        saveTimer -= Time.deltaTime;
-        if (saveTimer <= 0f)
-        {
-            SaveSystem.SavePlayerInfo(this);
-            saveTimer = saveInterval;
-        }
     }
 
-    void applyPerks()
+    public void applyPerks()
     {
-        if (equippedItem1 != null)
+        int multiplier = 1;
+        int hpBonus = 0;
+        int atkBonus = 0;
+        int regenBonus = 0;
+        
+        foreach (var item in items)
         {
-            attackDamage *= 1f + (int)equippedItem1.rarity / 100f;
+            if (Items.items[item.id].type == ItemType.Ori && item.isEquipped)
+            {
+                multiplier = ((OriItem)Items.items[item.id]).multiplier;
+            }
+
+            if (Items.items[item.id].type == ItemType.Gene && item.isEquipped)
+            {
+                if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.Attack)
+                    atkBonus += ((GeneItem)Items.items[item.id]).boost;
+                if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.HP)
+                    hpBonus += ((GeneItem)Items.items[item.id]).boost;
+                if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.Regen)
+                    regenBonus += ((GeneItem)Items.items[item.id]).boost;
+            }
         }
-        if (equippedItem2 != null)
-        {
-            maxHealth *= 1f + (int)equippedItem2.rarity / 100f;
-        }
-        if (equippedItem3 != null)
-        {
-            pointIncreasePerMinute *= 1f + (int)equippedItem3.rarity / 100f;
-        }
-        if (equippedItem4 != null)
-        {
-            cooldown *= 1f - (int)equippedItem4.rarity / 100f;
-        }
+        
+        maxHealth = 100 + hpBonus * multiplier;
+        attackDamage = 20 + atkBonus * multiplier;
+        pointIncreasePerMinute = 1 + regenBonus * multiplier;
     }
 
     private void PlayerInfoToPlayer(PlayerInfo playerInfo)
     {
-        this.currentHealth = playerInfo.currentHealth + (float)(DateTime.Now - playerInfo.saveTime).TotalMinutes * pointIncreasePerMinute;
-        this.equippedItem1 = playerInfo.equippedItem1;
-        this.equippedItem2 = playerInfo.equippedItem2;
-        this.equippedItem3 = playerInfo.equippedItem3;
-        this.equippedItem4 = playerInfo.equippedItem4;
-        this.items = new List<Item>(playerInfo.items);
+        currentHealth = playerInfo.currentHealth + (float)(DateTime.Now - playerInfo.saveTime).TotalMinutes * pointIncreasePerMinute;
+        items = playerInfo.items;
     }
 
     public void TakeDamage(float damage)
@@ -133,7 +132,7 @@ public class Player : MonoBehaviour
         textMeshPro.color = Color.red;
     }
     
-    public void giveItem(Item item)
+    public void giveItem(ItemKey item)
     {
         items.Add(item);
         SaveSystem.SavePlayerInfo(this);

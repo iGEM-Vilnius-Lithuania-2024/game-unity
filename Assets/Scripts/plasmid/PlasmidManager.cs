@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -16,17 +18,20 @@ public class PlasmidManager : MonoBehaviour
     public TMP_Text itemDescriptionText;
     public GameObject equipButton;
     public GameObject unequipButton;
+    public Button mergeButton;
     public Image itemIcon;
     public Image perkIcon;
     public TMP_Text perkBonus;
     public TMP_Text perkDescription;
     
-    public Image slot1;
-    public Image slot2;
-    public Image slot3;
-    public Image slot4;
+    public Button slot1;
+    public Button slot2;
+    public Button slot3;
+    public Button slot4;
+    public Button slot5;
+    public Button slot6;
 
-    public Item lastOpenItem;
+    public ItemKey lastOpenItem;
 
     void Start()
     {
@@ -37,61 +42,102 @@ public class PlasmidManager : MonoBehaviour
     {
         if (player != null)
         {
+            player.applyPerks();
             SaveSystem.SavePlayerInfo(player);
-            if (player.equippedItem1 != null)
-            {
-                slot1.name = player.equippedItem1.type.Name + "_" + player.equippedItem1.rarity;
-                slot1.sprite = Resources.Load<Sprite>("items/" + slot1.name);
-            }
-            else
-            {
-                slot1.sprite = Resources.Load<Sprite>("items/empty");
-                slot1.name = "slotEmpty";
-            }
-
-            if (player.equippedItem2 != null)
-            {
-                slot2.name = player.equippedItem2.type.Name + "_" + player.equippedItem2.rarity;
-                slot2.sprite = Resources.Load<Sprite>("items/" + slot2.name);
-            }
-            else
-            {
-                slot2.sprite = Resources.Load<Sprite>("items/empty");
-                slot2.name = "slotEmpty";
-            }
-
-            if (player.equippedItem3 != null)
-            {
-                slot3.name = player.equippedItem3.type.Name + "_" + player.equippedItem3.rarity;
-                slot3.sprite = Resources.Load<Sprite>("items/" + slot3.name);
-            }
-            else
-            {
-                slot3.sprite = Resources.Load<Sprite>("items/empty");
-                slot3.name = "slotEmpty";
-            }
-
-            if (player.equippedItem4 != null)
-            {
-                slot4.name = player.equippedItem4.type.Name + "_" + player.equippedItem4.rarity;
-                slot4.sprite = Resources.Load<Sprite>("items/" + slot4.name);
-            }
-            else
-            {
-                slot4.sprite = Resources.Load<Sprite>("items/empty");
-                slot4.name = "slotEmpty";
-            }
-
+            
             foreach (Transform child in panel.transform)
             {
                 Destroy(child.gameObject);
             }
-            foreach (Item _item in player.items)
+            
+            slot1.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot2.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot3.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot4.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot5.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot6.image.sprite = Resources.Load<Sprite>("items/empty");
+            
+            int slotsUnlocked = 0;
+            
+            player.items = player.items.OrderByDescending(item => item.id.Item2).ToList();
+            
+            foreach (ItemKey _item in player.items)
             {
-                GameObject newItem = Instantiate(item, panel.transform);
-                newItem.name = _item.type + "_" + _item.rarity;
-                
-                newItem.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("items/" + newItem.name);
+                if (_item.isEquipped)
+                { 
+                    if (_item.equipedSlot == 1)
+                    {
+                        slot1.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot1.name = _item.id.Item1 + "_" + _item.id.Item2;
+                    }
+                    else if (_item.equipedSlot == 2)
+                    {
+                        slot2.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot2.name = _item.id.Item1 + "_" + _item.id.Item2;
+                        slotsUnlocked = ((PromoterItem)Items.items[_item.id]).slotsUnlocked;
+                    }
+                    else if (_item.equipedSlot == 3)
+                    {
+                        slot3.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot3.name = _item.id.Item1 + "_" + _item.id.Item2;
+                    }
+                    else if (_item.equipedSlot == 4)
+                    {
+                        slot4.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot4.name = _item.id.Item1 + "_" + _item.id.Item2;
+                    }
+                    else if (_item.equipedSlot == 5)
+                    {
+                        slot5.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot5.name = _item.id.Item1 + "_" + _item.id.Item2;
+                    }
+                    else if (_item.equipedSlot == 6)
+                    {
+                        slot6.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot6.name = _item.id.Item1 + "_" + _item.id.Item2;
+                    }
+                }
+                else
+                {
+                    GameObject newItem = Instantiate(item, panel.transform);
+
+                    newItem.name = _item.id.Item1 + "_" + _item.id.Item2;
+                    newItem.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                }
+            }
+
+            if (slotsUnlocked < 4)
+            {
+                slot6.interactable = false;
+            }
+            if (slotsUnlocked < 3)
+            {
+                slot5.interactable = false;
+            }
+            if (slotsUnlocked < 2)
+            {
+                slot4.interactable = false;
+            }
+            if (slotsUnlocked < 1)
+            {
+                slot3.interactable = false;
+            }
+
+            if (slotsUnlocked > 0)
+            {
+                slot3.interactable = true;
+            }
+            if (slotsUnlocked > 1)
+            {
+                slot4.interactable = true;
+            }
+            if (slotsUnlocked > 2)
+            {
+                slot5.interactable = true;
+            }
+            if (slotsUnlocked > 3)
+            {
+                slot6.interactable = true;
             }
         }
     }
@@ -102,12 +148,10 @@ public class PlasmidManager : MonoBehaviour
         {
             return;
         }
-        string itemType = item.name.Split('_')[0]; 
-        string itemRarity = item.name.Split('_')[1];
-        ItemType _itemType = ItemType.GetByName(itemType);
-        ItemRarity _itemRarity = (ItemRarity)Enum.Parse(typeof(ItemRarity), itemRarity);
-        lastOpenItem = new Item(_itemType, _itemRarity);
-        string itemDescription = _itemType.Description;
+        int id1 = Int32.Parse(item.name.Split('_')[0]); 
+        int id2 = Int32.Parse(item.name.Split('_')[1]);
+        Item _item = Items.items[new Tuple<int, int>(id1, id2)];
+        lastOpenItem = new ItemKey(new Tuple<int, int>(id1, id2), isEquiped, -1);
         
         if (isEquiped)
         {
@@ -122,20 +166,49 @@ public class PlasmidManager : MonoBehaviour
         
         equipPopup.SetActive(true);
 
-        itemTypeText.text = itemType;
-        itemIcon.sprite = Resources.Load<Sprite>("items/" + item.name);
-        itemDescriptionText.text = itemDescription;
-        
-        perkIcon.sprite = Resources.Load<Sprite>("items/perks/" + itemType);
-        if (_itemType == ItemType.Ori)
+        itemTypeText.text = _item.name;
+        itemIcon.sprite = Resources.Load<Sprite>(_item.iconPath);
+        itemDescriptionText.text = _item.description;
+
+        if (_item.type == ItemType.Promoter)
         {
-            perkBonus.text = "-" + (int)_itemRarity + "%";
+            perkIcon.sprite = Resources.Load<Sprite>("items/perks/promoter");
+            perkDescription.text = "Unlocks " + ((PromoterItem)_item).slotsUnlocked + " extra gene slots";
+        }
+        else if (_item.type == ItemType.Ori)
+        {
+            perkIcon.sprite = Resources.Load<Sprite>("items/perks/ori");
+            perkDescription.text = "Multiplies all genes bonus by " + ((OriItem)_item).multiplier;
+        } 
+        else
+        {
+            perkIcon.sprite = Resources.Load<Sprite>("items/perks/gene" + "_" + ((GeneItem)_item).attribute.ToString().ToLower());
+            perkDescription.text = "Increases " + ((GeneItem)_item).attribute + " by " + ((GeneItem)_item).boost;
+        }
+
+        if (lastOpenItem.id.Item2 < 3)
+        {
+            int count = 0;
+            foreach (ItemKey i in player.items)
+            {
+                if (i.id.Equals(lastOpenItem.id))
+                {
+                    count++;
+                }
+            }
+            if (count < 3)
+            {
+                mergeButton.interactable = false;
+            }
+            else
+            {
+                mergeButton.interactable = true;
+            }
         }
         else
         {
-            perkBonus.text = "+" + (int)_itemRarity + "%";
+            mergeButton.gameObject.SetActive(false);
         }
-        perkDescription.text = _itemType.PerkDescription;
     }
     
     public void CloseItemDescription()
@@ -143,75 +216,120 @@ public class PlasmidManager : MonoBehaviour
         equipPopup.SetActive(false);
     }
     
-    public void EquipItem()
+    public void EquipItem(int slot)
     {
-        if (lastOpenItem.type == ItemType.Promoter)
+        int equipSlot = slot;
+        int previousSlotsUnlocked = 0;
+        int currentSlotsUnlocked = 0;
+
+        if (slot == 3 && !slot3.interactable || slot == 4 && !slot4.interactable || slot == 5 && !slot5.interactable || slot == 6 && !slot6.interactable)
         {
-            if (player.equippedItem1 != null)
-            {
-                player.items.Add(player.equippedItem1);
-            }
-            player.equippedItem1 = lastOpenItem;
+            return; //TODO: Show info message
         }
-        else if (lastOpenItem.type == ItemType.Genes1)
+        
+        if (Items.items[lastOpenItem.id].type == ItemType.Ori)
         {
-            if (player.equippedItem2 != null)
-            {
-                player.items.Add(player.equippedItem2);
-            }
-            player.equippedItem2 = lastOpenItem;
+            equipSlot = 1;
         }
-        else if (lastOpenItem.type == ItemType.Genes2)
+        else if (Items.items[lastOpenItem.id].type == ItemType.Promoter)
         {
-            if (player.equippedItem3 != null)
-            {
-                player.items.Add(player.equippedItem3);
-            }
-            player.equippedItem3 = lastOpenItem;
-        }
-        else if (lastOpenItem.type == ItemType.Ori)
-        {
-            if (player.equippedItem4 != null)
-            {
-                player.items.Add(player.equippedItem4);
-            }
-            player.equippedItem4 = lastOpenItem;
+            equipSlot = 2;
         }
 
-        Item itemToRemove = player.items.FirstOrDefault(item => 
-                item.type == lastOpenItem.type &&
-                item.rarity == lastOpenItem.rarity
-        );
-
-        if (itemToRemove != null)
+        bool isEquipped = false;
+        bool isUnEquipped = false;
+        foreach (var item in player.items)
         {
-            player.items.Remove(itemToRemove);
+            if (item.equipedSlot == equipSlot && !isUnEquipped)
+            {
+                item.isEquipped = false;
+                item.equipedSlot = -1;
+                isUnEquipped = true;
+                if (equipSlot == 2)
+                {
+                    previousSlotsUnlocked = ((PromoterItem)Items.items[item.id]).slotsUnlocked;
+                }
+            }
+            if (item.id.Equals(lastOpenItem.id) && !isEquipped)
+            {
+                item.isEquipped = true;
+                item.equipedSlot = equipSlot;
+                isEquipped = true;
+                if (equipSlot == 2)
+                {
+                    currentSlotsUnlocked = ((PromoterItem)Items.items[item.id]).slotsUnlocked;
+                }
+            }
+            if (isEquipped && isUnEquipped)
+            {
+                break;
+            }
         }
 
+        if (previousSlotsUnlocked > currentSlotsUnlocked)
+        {
+            foreach (var item in player.items)
+            {
+                if (item.equipedSlot > 2 + currentSlotsUnlocked)
+                {
+                    item.isEquipped = false;
+                    item.equipedSlot = -1;
+                }
+            }
+        }
+        
         UpdateUI();
         CloseItemDescription();
     }
     
     public void UnequipItem()
     {
-        player.items.Add(lastOpenItem);
-        if (lastOpenItem.type == ItemType.Promoter)
+        foreach (var item in player.items)
         {
-            player.equippedItem1 = null;
+            if (item.id.Equals(lastOpenItem.id))
+            {
+                item.isEquipped = false;
+                item.equipedSlot = -1;
+            }
         }
-        else if (lastOpenItem.type == ItemType.Genes1)
+
+        if (lastOpenItem.equipedSlot == 2)
         {
-            player.equippedItem2 = null;
+            foreach (var item in player.items)
+            {
+                if (item.equipedSlot == 3 || item.equipedSlot == 4 || item.equipedSlot == 5 || item.equipedSlot == 6)
+                {
+                    item.isEquipped = false;
+                    item.equipedSlot = -1;
+                }
+            }
         }
-        else if (lastOpenItem.type == ItemType.Genes2)
-        {
-            player.equippedItem3 = null;
-        }
-        else if (lastOpenItem.type == ItemType.Ori)
-        {
-            player.equippedItem4 = null;
-        }
+
         UpdateUI();
         CloseItemDescription();
+    }
+    
+    public void MergeItems()
+    {
+        int count = 3;
+        for (int i = player.items.Count - 1; i >= 0; i--)
+        {
+            if (player.items[i].id.Equals(lastOpenItem.id) && count > 0)
+            {
+                count--;
+                player.items.RemoveAt(i);
+            }
+        }
+        
+        Tuple<int, int> newId = new Tuple<int, int>(lastOpenItem.id.Item1, lastOpenItem.id.Item2 + 1);
+        
+        player.items.Add(new ItemKey(newId, lastOpenItem.isEquipped, lastOpenItem.equipedSlot));
+        UpdateUI();
+        CloseItemDescription();
+
+        GameObject newItem = new GameObject();
+        newItem.name = newId.Item1 + "_" + newId.Item2;
+        OpenItemDescription(newItem, lastOpenItem.isEquipped);
+        newItem.Destroy();
     }
 }

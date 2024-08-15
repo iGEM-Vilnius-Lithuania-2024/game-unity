@@ -1711,12 +1711,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf19a68f55f804dba8da31113c8cb8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanBacteria: {fileID: 3335036889427855862, guid: 4b376943753ab8d4e9d51ce3378abc54, type: 3}
-  animalBacteria: {fileID: 3335036889427855862, guid: 4b376943753ab8d4e9d51ce3378abc54, type: 3}
-  soilBacteria: {fileID: 5207973872570944932, guid: 36953a5aa19329e43b3c8d31c79b3009, type: 3}
-  waterBacteria: {fileID: 5207973872570944932, guid: 36953a5aa19329e43b3c8d31c79b3009, type: 3}
-  plantBacteria: {fileID: 8009035006982504568, guid: 47d99281beb5b79439680c2e743c8f35, type: 3}
-  foodBacteria: {fileID: 8009035006982504568, guid: 47d99281beb5b79439680c2e743c8f35, type: 3}
+  humanBacteria: {fileID: 7691460896370386567, guid: d971ad513427341bfb96def083f5d2eb, type: 3}
+  animalBacteria: {fileID: 7691460896370386567, guid: d971ad513427341bfb96def083f5d2eb, type: 3}
+  soilBacteria: {fileID: 1472836269948221754, guid: 18e1b33e404d4450ca6add6633c987fa, type: 3}
+  waterBacteria: {fileID: 1472836269948221754, guid: 18e1b33e404d4450ca6add6633c987fa, type: 3}
+  plantBacteria: {fileID: 3083049360938311823, guid: e1b65ee3dbb3241ea9ce2bbe0baa4131, type: 3}
+  foodBacteria: {fileID: 3083049360938311823, guid: e1b65ee3dbb3241ea9ce2bbe0baa4131, type: 3}
   moveToSpawnDialog: {fileID: 1707104005}
   battleButton: {fileID: 119903632}
   runButton: {fileID: 936418077}

@@ -46,11 +46,9 @@ public static class SaveSystem
                 return scanInfos;
             }
         }
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
-            return new List<ScanInfo>();
-        }
+        
+        Debug.LogError("Save file not found in " + path);
+        return new List<ScanInfo>();
     }
     
     public static void SavePlayerInfo(Player player)
@@ -74,9 +72,7 @@ public static class SaveSystem
             PlayerInfo playerInfo = JsonConvert.DeserializeObject<PlayerInfo>(jsonString);
             return playerInfo;
         }
-        else
-        {
-            return new PlayerInfo();
-        }
+        
+        return new PlayerInfo().Initialize();
     }
 }

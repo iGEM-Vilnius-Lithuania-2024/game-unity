@@ -486,16 +486,16 @@ MonoBehaviour:
   foodBacteria: {fileID: 8009035006982504568, guid: 47d99281beb5b79439680c2e743c8f35, type: 3}
   humanBackgroundVertical: {fileID: 5416185116930125884, guid: 5c930da3118da0346b570fd5ccbeb584, type: 3}
   humanBackgroundHorizontal: {fileID: 2924741775513102193, guid: ed6c17d5f1b66fd42834926ccba579a4, type: 3}
-  animalBackgroundVertical: {fileID: 5416185116930125884, guid: 5c930da3118da0346b570fd5ccbeb584, type: 3}
-  animalBackgroundHorizontal: {fileID: 2924741775513102193, guid: ed6c17d5f1b66fd42834926ccba579a4, type: 3}
+  animalBackgroundVertical: {fileID: 7185784544274857454, guid: bc32e4eab968e974fa450f281d236508, type: 3}
+  animalBackgroundHorizontal: {fileID: 5418000369328141110, guid: 3f33346bb849a0040b559f6c55b677b8, type: 3}
   soilBackgroundVertical: {fileID: 121898268398876617, guid: f53e4fecc7d11b042b1927ae46b54837, type: 3}
   soilBackgroundHorizontal: {fileID: 4178776745468783549, guid: ff72ea59e1a5e7843887ecedc2234164, type: 3}
   waterBackgroundVertical: {fileID: 7100005398705130775, guid: 9eaff4f8633ed2346894cd6647eb61c9, type: 3}
   waterBackgroundHorizontal: {fileID: 3607082580339925592, guid: 69306c71c58a472499804bdb5e90baa4, type: 3}
   plantBackgroundVertical: {fileID: 6486819970920563408, guid: 28488b01216c6804f87166125205abc6, type: 3}
   plantBackgroundHorizontal: {fileID: 4247407606623597633, guid: 3075b93a5418bca4290a999650e0c904, type: 3}
-  foodBackgroundVertical: {fileID: 2571905377383145771, guid: 93911f3555464704785e3ec73b4d94de, type: 3}
-  foodBackgroundHorizontal: {fileID: 6435680249252225405, guid: 2c7d4c01cd8811942badc85fe6f165f9, type: 3}
+  foodBackgroundVertical: {fileID: 842698755796500270, guid: 177fe57f643402c4890cb125cbbc492f, type: 3}
+  foodBackgroundHorizontal: {fileID: 286525958062799457, guid: abe670a8b2232e4449c6780e12953842, type: 3}
 --- !u!4 &404958605
 Transform:
   m_ObjectHideFlags: 0

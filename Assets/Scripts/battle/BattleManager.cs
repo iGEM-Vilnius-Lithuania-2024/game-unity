@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -43,12 +44,10 @@ public class BattleManager : MonoBehaviour
     
     private void PlaceBacteria(GameObject objectToSpawn)
     {
-        _spawnedObject = Instantiate(objectToSpawn, new Vector3(0, 50, 100), new Quaternion(0f, 0f, 0f, 1f));
-        _spawnedObject.transform.localScale = new Vector3(2000, 2000, 2000);
+        _spawnedObject = Instantiate(objectToSpawn);
         
-        GameObject battleBacteriaCanvasObject = Instantiate(battleBacteriaCanvas);
-        battleBacteriaCanvasObject.transform.SetParent(_spawnedObject.transform, true);
-        battleBacteriaCanvasObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        GameObject battleBacteriaCanvasObject = Instantiate(battleBacteriaCanvas, new Vector3(0, 100, 0), new Quaternion(0f, 0f, 0f, 1f));
+        battleBacteriaCanvasObject.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = MainManager.Instance.selectedBacteria.name;
         
         _spawnedObject.tag = "bacteria";
         Bacteria bacteriaScript = _spawnedObject.AddComponent<Bacteria>();

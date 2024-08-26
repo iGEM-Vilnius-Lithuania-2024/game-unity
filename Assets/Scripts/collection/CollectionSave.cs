@@ -8,7 +8,7 @@ public class CollectionSave
 
     public CollectionSave()
     {
-        
+        ids = new List<int>();
     }
     
     public CollectionSave(List<int> ids)

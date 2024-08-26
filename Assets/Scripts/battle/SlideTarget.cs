@@ -69,7 +69,7 @@ public class SlideTarget : MonoBehaviour
                 float damage = CalculateDamage();
                 PopUpDamage((int)Math.Round(damage, 0), aim.transform.localPosition);
                 GameObject bacteria = GameObject.FindGameObjectWithTag("bacteria");
-                bacteria.transform.GetComponent<Bacteria>().TakeDamage((int)Math.Round(damage, 0));
+                bacteria.GetComponent<Bacteria>().TakeDamage((int)Math.Round(damage, 0));
                 SpawnAtRandomPosition();
             }
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -242,6 +242,18 @@ MonoBehaviour:
       - m_Target: {fileID: 119903637}
         m_TargetAssemblyTypeName: BattleSceneManager, Assembly-CSharp
         m_MethodName: Battle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1424378116}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -945,6 +957,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1424378116}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &936418080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,6 +1434,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187667136}
   m_CullTransparentMesh: 1
+--- !u!1001 &1424378115
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483491477829392781, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144118803785674091, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144118803785674091, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a1cdf53301d124357b0520a67b88c9c0, type: 3}
+    - target: {fileID: 6865493954066719990, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+      propertyPath: m_Name
+      value: ButtonSound
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 889662914137745603, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+--- !u!82 &1424378116 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3549619918350644713, guid: 70aa9d57865024c799c898bb50f68c25, type: 3}
+  m_PrefabInstance: {fileID: 1424378115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1529458852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,12 +1806,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf19a68f55f804dba8da31113c8cb8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanBacteria: {fileID: 7691460896370386567, guid: d971ad513427341bfb96def083f5d2eb, type: 3}
-  animalBacteria: {fileID: 7691460896370386567, guid: d971ad513427341bfb96def083f5d2eb, type: 3}
-  soilBacteria: {fileID: 1472836269948221754, guid: 18e1b33e404d4450ca6add6633c987fa, type: 3}
-  waterBacteria: {fileID: 1472836269948221754, guid: 18e1b33e404d4450ca6add6633c987fa, type: 3}
-  plantBacteria: {fileID: 3083049360938311823, guid: e1b65ee3dbb3241ea9ce2bbe0baa4131, type: 3}
-  foodBacteria: {fileID: 3083049360938311823, guid: e1b65ee3dbb3241ea9ce2bbe0baa4131, type: 3}
   moveToSpawnDialog: {fileID: 1707104005}
   battleButton: {fileID: 119903632}
   runButton: {fileID: 936418077}
@@ -2102,3 +2191,4 @@ SceneRoots:
   - {fileID: 419230702}
   - {fileID: 1081213825}
   - {fileID: 944558529}
+  - {fileID: 1424378115}

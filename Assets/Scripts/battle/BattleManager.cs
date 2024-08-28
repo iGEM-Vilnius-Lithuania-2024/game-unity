@@ -18,6 +18,10 @@ public class BattleManager : MonoBehaviour
     public GameObject victoryPopup;
     public Image reward;
     public GameObject defeatPopup;
+
+    public AudioSource damageSound;
+    public AudioSource victorySound;
+    public AudioSource defeatSound;
     
     public GameObject humanBackgroundVertical;
     public GameObject humanBackgroundHorizontal;
@@ -88,6 +92,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerDied()
     {
+        defeatSound.Play();
         SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
         
         defeatPopup.SetActive(true);
@@ -96,6 +101,7 @@ public class BattleManager : MonoBehaviour
     
     public void BacteriaDied()
     {
+        victorySound.Play();
         SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
         SaveSystem.SaveCollectionId(MainManager.Instance.selectedBacteria.id);
         target.SetActive(false);

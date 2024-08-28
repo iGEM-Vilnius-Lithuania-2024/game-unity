@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,9 @@ public class SlideTarget : MonoBehaviour
     public GameObject horizontalLine;
     public GameObject target;
     public GameObject damagePopup;
+    public AudioSource targetSound;
+    public AudioSource hitSound;
+    public AudioSource missSound;
 
     private Vector3 topPosition;
     private Vector3 bottomPosition;
@@ -63,14 +67,25 @@ public class SlideTarget : MonoBehaviour
                 horizontalLineY = aim.transform.localPosition.y;
                 leftPosition = new Vector3(leftPosition.x, horizontalLineY, leftPosition.z);
                 rightPosition = new Vector3(rightPosition.x, horizontalLineY, rightPosition.z);
+                targetSound.Play();
             }
             else
             {
                 float damage = CalculateDamage();
                 PopUpDamage((int)Math.Round(damage, 0), aim.transform.localPosition);
                 GameObject bacteria = GameObject.FindGameObjectWithTag("bacteria");
-                bacteria.GetComponent<Bacteria>().TakeDamage((int)Math.Round(damage, 0));
+                int roundedDamage = (int)Math.Round(damage, 0);
+                bacteria.GetComponent<Bacteria>().TakeDamage(roundedDamage);
                 SpawnAtRandomPosition();
+                if (roundedDamage == 0)
+                {
+                    missSound.Play();
+                }
+                else
+                {
+                    targetSound.Play();
+                    StartCoroutine(PlaySoundWithDelay(hitSound, 0.05f));
+                }
             }
         }
 
@@ -181,5 +196,11 @@ public class SlideTarget : MonoBehaviour
         GameObject damagePopupInstance = Instantiate(damagePopup, canvasRectTransform);
         damagePopupInstance.transform.localPosition = aimPosition;
         damagePopupInstance.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = damage.ToString();
+    }
+    
+    IEnumerator PlaySoundWithDelay(AudioSource audioSource, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioSource.Play();
     }
 }

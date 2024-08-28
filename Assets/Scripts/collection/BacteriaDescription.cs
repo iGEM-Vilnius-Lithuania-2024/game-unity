@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using bacteria;
 using TMPro;
@@ -17,11 +18,13 @@ public class BacteriaDescription : MonoBehaviour
     
     private GameObject currentBacteriaModel;
     private GameObject uiPrefabInstance;
+    private Boolean stopCoroutine;
 
     public void OpenItemDescription(int id)
     {
         if (id > 0)
         {
+            stopCoroutine = false;
             BacteriaInfo bacteria = BacteriaList.bacterias.Find(b => b.id == id); 
             nameText.text = bacteria.name;
             descriptionText.text = bacteria.description;
@@ -34,6 +37,7 @@ public class BacteriaDescription : MonoBehaviour
     public void CloseDescription()
     {
         descriptionPopup.SetActive(false);
+        stopCoroutine = true;
         if (currentBacteriaModel != null)
         {
             Destroy(currentBacteriaModel);
@@ -67,6 +71,7 @@ public class BacteriaDescription : MonoBehaviour
         bacteriaCamera.targetTexture = renderTexture;
 
         currentBacteriaModel = Instantiate(bacteriaPrefab, bacteriaCamera.transform.position + bacteriaCamera.transform.forward * 5f, Quaternion.identity);
+        currentBacteriaModel.transform.localScale /= 14;
         bacteriaCamera.Render();
         
         RawImage rawImage = uiPrefabInstance.GetComponentInChildren<RawImage>();
@@ -77,7 +82,7 @@ public class BacteriaDescription : MonoBehaviour
 
     private IEnumerator SpinModel()
     {
-        while (true)
+        while (!stopCoroutine)
         {
             if (currentBacteriaModel != null)
             {

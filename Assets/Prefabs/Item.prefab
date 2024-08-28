@@ -159,7 +159,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5316080610524236962}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: openEquipPopUp
+        m_MethodName: OpenEquipPopUp
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4265284580287366648}

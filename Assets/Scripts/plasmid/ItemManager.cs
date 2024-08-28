@@ -2,6 +2,7 @@
 
 public class ItemManager : MonoBehaviour
 {
+    public GameObject item;
     private PlasmidManager plasmidManager;
     
     void Start()
@@ -9,28 +10,38 @@ public class ItemManager : MonoBehaviour
         plasmidManager = GameObject.Find("PlasmidManager").GetComponent<PlasmidManager>();
     }
     
-    public void openEquipPopUp(GameObject item)
+    public void OpenEquipPopUp(GameObject item)
     {
-        plasmidManager.OpenItemDescription(item, false);
+        plasmidManager.OpenItemDescription(item, false, -1);
     }
     
-    public void openUnequipPopUp(GameObject item)
+    public void OpenUnequipPopUp(int slot)
     {
-        plasmidManager.OpenItemDescription(item, true);
+        plasmidManager.OpenItemDescription(item, true, slot);
     }
     
-    public void equipItem(int slot)
+    public void EquipItem(int slot)
     {
         plasmidManager.EquipItem(slot);
     }
     
-    public void unequipItem()
+    public void UnequipItem()
     {
         plasmidManager.UnequipItem();
     }
     
-    public void mergeItems()
+    public void MergeItems()
     {
         plasmidManager.MergeItems();
+    }
+
+    public void OpenGeneSlotEquipPopUp()
+    {
+        plasmidManager.OpenGeneSlotEquipPopUp();
+    }
+    
+    public void CloseGeneSlotEquipPopUp()
+    {
+        plasmidManager.CloseGeneSlotEquipPopUp();
     }
 }

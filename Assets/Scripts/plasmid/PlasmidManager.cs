@@ -13,7 +13,12 @@ public class PlasmidManager : MonoBehaviour
     public GameObject item;
     public GameObject panel;
     public GameObject equipPopup;
-    
+    public GameObject geneSlotEquipPopup;
+
+    public Button equipSlot1;
+    public Button equipSlot2;
+    public Button equipSlot3;
+    public Button equipSlot4;
     public TMP_Text itemTypeText;
     public TMP_Text itemDescriptionText;
     public GameObject equipButton;
@@ -51,11 +56,17 @@ public class PlasmidManager : MonoBehaviour
             }
             
             slot1.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot1.name = "slotEmpty";
             slot2.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot2.name = "slotEmpty";
             slot3.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot3.name = "slotEmpty";
             slot4.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot4.name = "slotEmpty";
             slot5.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot5.name = "slotEmpty";
             slot6.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot6.name = "slotEmpty";
             
             int slotsUnlocked = 0;
             
@@ -142,7 +153,7 @@ public class PlasmidManager : MonoBehaviour
         }
     }
     
-    public void OpenItemDescription(GameObject item, bool isEquiped)
+    public void OpenItemDescription(GameObject item, bool isEquiped, int equipSlot)
     {
         if (item.name == "slotEmpty")
         {
@@ -151,7 +162,7 @@ public class PlasmidManager : MonoBehaviour
         int id1 = Int32.Parse(item.name.Split('_')[0]); 
         int id2 = Int32.Parse(item.name.Split('_')[1]);
         Item _item = Items.items[new Tuple<int, int>(id1, id2)];
-        lastOpenItem = new ItemKey(new Tuple<int, int>(id1, id2), isEquiped, -1);
+        lastOpenItem = new ItemKey(new Tuple<int, int>(id1, id2), isEquiped, equipSlot);
         
         if (isEquiped)
         {
@@ -222,11 +233,6 @@ public class PlasmidManager : MonoBehaviour
         int previousSlotsUnlocked = 0;
         int currentSlotsUnlocked = 0;
 
-        if (slot == 3 && !slot3.interactable || slot == 4 && !slot4.interactable || slot == 5 && !slot5.interactable || slot == 6 && !slot6.interactable)
-        {
-            return; //TODO: Show info message
-        }
-        
         if (Items.items[lastOpenItem.id].type == ItemType.Ori)
         {
             equipSlot = 1;
@@ -234,6 +240,17 @@ public class PlasmidManager : MonoBehaviour
         else if (Items.items[lastOpenItem.id].type == ItemType.Promoter)
         {
             equipSlot = 2;
+        }
+
+        if (equipSlot == -1)
+        {
+            OpenGeneSlotEquipPopUp();
+            return;
+        }
+
+        if (slot == 3 && !slot3.interactable || slot == 4 && !slot4.interactable || slot == 5 && !slot5.interactable || slot == 6 && !slot6.interactable)
+        {
+            return; //TODO: Show info message
         }
 
         bool isEquipped = false;
@@ -280,19 +297,11 @@ public class PlasmidManager : MonoBehaviour
         
         UpdateUI();
         CloseItemDescription();
+        CloseGeneSlotEquipPopUp();
     }
     
     public void UnequipItem()
     {
-        foreach (var item in player.items)
-        {
-            if (item.id.Equals(lastOpenItem.id))
-            {
-                item.isEquipped = false;
-                item.equipedSlot = -1;
-            }
-        }
-
         if (lastOpenItem.equipedSlot == 2)
         {
             foreach (var item in player.items)
@@ -302,6 +311,15 @@ public class PlasmidManager : MonoBehaviour
                     item.isEquipped = false;
                     item.equipedSlot = -1;
                 }
+            }
+        }
+
+        foreach (var item in player.items)
+        {
+            if (item.id.Equals(lastOpenItem.id))
+            {
+                item.isEquipped = false;
+                item.equipedSlot = -1;
             }
         }
 
@@ -329,7 +347,44 @@ public class PlasmidManager : MonoBehaviour
 
         GameObject newItem = new GameObject();
         newItem.name = newId.Item1 + "_" + newId.Item2;
-        OpenItemDescription(newItem, lastOpenItem.isEquipped);
+        OpenItemDescription(newItem, lastOpenItem.isEquipped, lastOpenItem.equipedSlot);
         newItem.Destroy();
+    }
+
+    public void OpenGeneSlotEquipPopUp()
+    {
+        geneSlotEquipPopup.SetActive(true);
+
+        int equippedPromoterSlotsUnlocked = 0;
+        foreach (var item in player.items)
+        {
+            if (item.equipedSlot == 2)
+            {
+                equippedPromoterSlotsUnlocked = ((PromoterItem)Items.items[item.id]).slotsUnlocked;
+                break;
+            }
+        }
+
+        if (equippedPromoterSlotsUnlocked < 4)
+        {
+            equipSlot4.interactable = false;
+        }
+        if (equippedPromoterSlotsUnlocked < 3)
+        {
+            equipSlot3.interactable = false;
+        }
+        if (equippedPromoterSlotsUnlocked < 2)
+        {
+            equipSlot2.interactable = false;
+        }
+        if (equippedPromoterSlotsUnlocked < 1)
+        {
+            equipSlot1.interactable = false;
+        }
+    }
+    
+    public void CloseGeneSlotEquipPopUp()
+    {
+        geneSlotEquipPopup.SetActive(false);
     }
 }

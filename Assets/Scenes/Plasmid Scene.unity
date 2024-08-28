@@ -240,7 +240,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 29569808}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: openUnequipPopUp
+        m_MethodName: OpenUnequipPopUp
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 29569805}
@@ -569,7 +569,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 47479586}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: openUnequipPopUp
+        m_MethodName: OpenUnequipPopUp
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 47479582}
@@ -1009,7 +1009,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 447627252}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: equipItem
+        m_MethodName: EquipItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1438,7 +1438,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 447627252}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: mergeItems
+        m_MethodName: MergeItems
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1583,7 +1583,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 281486498}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: openUnequipPopUp
+        m_MethodName: OpenUnequipPopUp
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 281486494}
@@ -2858,7 +2858,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 698097228}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: openUnequipPopUp
+        m_MethodName: OpenUnequipPopUp
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 698097224}
@@ -4300,7 +4300,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1284695384}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: openUnequipPopUp
+        m_MethodName: OpenUnequipPopUp
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1284695380}
@@ -5341,7 +5341,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 447627252}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: unequipItem
+        m_MethodName: UnequipItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5634,7 +5634,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1583224728}
         m_TargetAssemblyTypeName: ItemManager, Assembly-CSharp
-        m_MethodName: openUnequipPopUp
+        m_MethodName: OpenUnequipPopUp
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1583224725}

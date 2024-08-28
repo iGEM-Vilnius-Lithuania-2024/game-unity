@@ -55,6 +55,7 @@ public class Bacteria : MonoBehaviour
             
             // TODO: Deal damage animation
             
+            battleManager.damageSound.Play();
             player.TakeDamage(damage);
         }
     }

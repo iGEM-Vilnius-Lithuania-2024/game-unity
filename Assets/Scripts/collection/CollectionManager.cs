@@ -10,6 +10,7 @@ namespace collection
         public Camera renderCamera; 
         public GameObject panel;
         public Material blackUnlitMaterial;
+        public AudioSource buttonSound;
 
         void Start()
         {
@@ -30,6 +31,7 @@ namespace collection
                 renderCamera.targetTexture = renderTexture;
                 
                 GameObject bacteriaInstance = Instantiate(bacteriaPrefab, renderCamera.transform.position + renderCamera.transform.forward * 5f, Quaternion.identity);
+                bacteriaInstance.transform.localScale /= 10;
                 
                 if (!collectionSave.ids.Contains(bacteria.id)) 
                 {
@@ -60,6 +62,7 @@ namespace collection
         }
         void OnBacteriaClick(int bacteriaId)
         {
+            buttonSound.Play();
             BacteriaDescription descriptionManager = GetComponent<BacteriaDescription>();
             if (descriptionManager != null)
             {

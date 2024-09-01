@@ -84,7 +84,7 @@ public class CaptureClassifier : MonoBehaviour
                     string lowerCaseSurface = surface.ToString().ToLower();
                     if (result.Contains(lowerCaseSurface))
                     {
-                        MainManager.Instance.detectedSurface = surface;
+                        MainManager.Instance.detectedSurface = Surface.Animal;
                         SceneManager.LoadSceneAsync(2);
                     }
                 }

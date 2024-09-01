@@ -603,7 +603,7 @@ MonoBehaviour:
   horizontalLine: {fileID: 345221179}
   targetArea: {fileID: 920736347}
   aim: {fileID: 950652310}
-  battleBacteriaCanvas: {fileID: 3171213305195920719, guid: c254865de6b0e4947a444b54bd2d0850, type: 3}
+  battleBacteriaCanvas: {fileID: 2576305091308373572, guid: db96ad8aff3c741658ebd622c092f42a, type: 3}
   victoryPopup: {fileID: 1339688674}
   reward: {fileID: 29866000}
   defeatPopup: {fileID: 383671176}
@@ -618,8 +618,8 @@ MonoBehaviour:
   soilBackgroundHorizontal: {fileID: 4178776745468783549, guid: ff72ea59e1a5e7843887ecedc2234164, type: 3}
   waterBackgroundVertical: {fileID: 7100005398705130775, guid: 9eaff4f8633ed2346894cd6647eb61c9, type: 3}
   waterBackgroundHorizontal: {fileID: 3607082580339925592, guid: 69306c71c58a472499804bdb5e90baa4, type: 3}
-  plantBackgroundVertical: {fileID: 6486819970920563408, guid: 28488b01216c6804f87166125205abc6, type: 3}
-  plantBackgroundHorizontal: {fileID: 4247407606623597633, guid: 3075b93a5418bca4290a999650e0c904, type: 3}
+  plantBackgroundVertical: {fileID: 3148050047847828183, guid: 2229a2b0ae0ce1b4989d9ca23e0520dc, type: 3}
+  plantBackgroundHorizontal: {fileID: 3861470275648872102, guid: b6668a72e2792474d895a96c378e6f73, type: 3}
   foodBackgroundVertical: {fileID: 842698755796500270, guid: 177fe57f643402c4890cb125cbbc492f, type: 3}
   foodBackgroundHorizontal: {fileID: 286525958062799457, guid: abe670a8b2232e4449c6780e12953842, type: 3}
 --- !u!4 &404958605

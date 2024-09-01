@@ -86,19 +86,22 @@ public class Player : MonoBehaviour
         
         foreach (var item in items)
         {
-            if (Items.items[item.id].type == ItemType.Ori && item.isEquipped)
+            if (item != null && item.id != null && Items.items[item.id] != null)
             {
-                multiplier = ((OriItem)Items.items[item.id]).multiplier;
-            }
+                if (Items.items[item.id].type == ItemType.Ori && item.isEquipped)
+                {
+                    multiplier = ((OriItem)Items.items[item.id]).multiplier;
+                }
 
-            if (Items.items[item.id].type == ItemType.Gene && item.isEquipped)
-            {
-                if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.Attack)
-                    atkBonus += ((GeneItem)Items.items[item.id]).boost;
-                if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.HP)
-                    hpBonus += ((GeneItem)Items.items[item.id]).boost;
-                if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.Regen)
-                    regenBonus += ((GeneItem)Items.items[item.id]).boost;
+                if (Items.items[item.id].type == ItemType.Gene && item.isEquipped)
+                {
+                    if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.Attack)
+                        atkBonus += ((GeneItem)Items.items[item.id]).boost;
+                    if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.HP)
+                        hpBonus += ((GeneItem)Items.items[item.id]).boost;
+                    if (((GeneItem)Items.items[item.id]).attribute == ItemAttribute.Regen)
+                        regenBonus += ((GeneItem)Items.items[item.id]).boost;
+                }
             }
         }
         

@@ -768,6 +768,7 @@ MonoBehaviour:
   targetSound: {fileID: 778407142}
   hitSound: {fileID: 186536650}
   missSound: {fileID: 996244829}
+  camera: {fileID: 1735396601}
 --- !u!1 &497877460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,6 +2410,7 @@ GameObject:
   - component: {fileID: 1735396604}
   - component: {fileID: 1735396603}
   - component: {fileID: 1735396602}
+  - component: {fileID: 1735396605}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2490,6 +2492,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 22.337, y: 0, z: 0}
+--- !u!114 &1735396605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735396601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc2c85ed21b4eba8bfd9e9794920de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 150
+  shakeMagnitude: 2
+  dampingSpeed: 2
 --- !u!1 &1767742903
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class SlideTarget : MonoBehaviour
     public AudioSource targetSound;
     public AudioSource hitSound;
     public AudioSource missSound;
+    public GameObject camera;
 
     private Vector3 topPosition;
     private Vector3 bottomPosition;
@@ -83,6 +84,7 @@ public class SlideTarget : MonoBehaviour
                 }
                 else
                 {
+                    camera.GetComponent<CameraShake>().StartShake();
                     targetSound.Play();
                     StartCoroutine(PlaySoundWithDelay(hitSound, 0.05f));
                 }

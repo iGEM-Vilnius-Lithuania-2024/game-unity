@@ -63,8 +63,7 @@ public class CaptureClassifier : MonoBehaviour
     {
         byte[] certBytes = Convert.FromBase64String(certFileBase64);
         X509Certificate2 clientCertificate = new X509Certificate2(certBytes, certPassword);
-        Debug.Log(clientCertificate);
-        
+
         HttpClientHandler handler = new HttpClientHandler();
         handler.ClientCertificates.Add(clientCertificate);
         handler.ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true;
@@ -80,7 +79,6 @@ public class CaptureClassifier : MonoBehaviour
             if (response.IsSuccessStatusCode)
             {
                 string result = await response.Content.ReadAsStringAsync();
-                Debug.Log(result);
                 foreach (Surface surface in Enum.GetValues(typeof(Surface)))
                 {
                     string lowerCaseSurface = surface.ToString().ToLower();

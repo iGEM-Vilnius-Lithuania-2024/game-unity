@@ -79,10 +79,10 @@ public class Player : MonoBehaviour
 
     public void applyPerks()
     {
-        int multiplier = 1;
-        int hpBonus = 0;
-        int atkBonus = 0;
-        int regenBonus = 0;
+        float multiplier = 1;
+        float hpBonus = 0;
+        float atkBonus = 0;
+        float regenBonus = 0;
         
         foreach (var item in items)
         {

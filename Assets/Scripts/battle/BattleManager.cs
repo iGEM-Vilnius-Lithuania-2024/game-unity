@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class BattleManager : MonoBehaviour
 {
     public Player player;
+    public Canvas canvas;
     
     public GameObject target;
     public GameObject verticalLine;
@@ -110,6 +111,7 @@ public class BattleManager : MonoBehaviour
         targetArea.SetActive(false);
         target.SetActive(false);
         aim.SetActive(false);
+        canvas.GetComponentInChildren<SlideTarget>().Destroy();
 
         GiveReward();
         victoryPopup.SetActive(true);

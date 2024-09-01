@@ -2,10 +2,12 @@
 {
     public ItemAttribute attribute { get; private set; }
     public int boost { get; private set; }
+    public string boostIconPath { get; private set; }
     
-    public GeneItem(string name, string description, string iconPath, ItemAttribute attribute, int boost) : base(ItemType.Gene, name, description, iconPath)
+    public GeneItem(string name, string description, string iconPath, ItemAttribute attribute, int boost, string boostIconPath) : base(ItemType.Gene, name, description, iconPath)
     {
         this.attribute = attribute;
         this.boost = boost;
+        this.boostIconPath = boostIconPath;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,7 +182,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: c53f2c340e8329d4286cfa9ef1345365, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -598,6 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 597898548}
+  canvas: {fileID: 412465280}
   target: {fileID: 140007783}
   verticalLine: {fileID: 683934551}
   horizontalLine: {fileID: 345221179}
@@ -759,6 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fab855053004fc6a2f28b24bad7cefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 597898548}
   aim: {fileID: 950652310}
   duration: 1.5
   verticalLine: {fileID: 683934551}

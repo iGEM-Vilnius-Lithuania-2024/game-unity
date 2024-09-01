@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class SlideTarget : MonoBehaviour
 {
+    public Player player;
     public GameObject aim;
     public float duration = 2.0f;
     public GameObject verticalLine;
@@ -190,7 +191,7 @@ public class SlideTarget : MonoBehaviour
     
         float normalizedDistance = Mathf.Clamp01(distance / maxDistance);
 
-        return Mathf.Lerp(20, 10, normalizedDistance);
+        return Mathf.Lerp(player.attackDamage, (float)Math.Round(player.attackDamage/2, 0), normalizedDistance);
     }
 
     private void PopUpDamage(int damage, Vector3 aimPosition)

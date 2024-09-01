@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlasmidManager : MonoBehaviour
@@ -35,6 +32,10 @@ public class PlasmidManager : MonoBehaviour
     public Button slot4;
     public Button slot5;
     public Button slot6;
+    public GameObject terminator1;
+    public GameObject terminator2;
+    public GameObject terminator3;
+    public GameObject terminator4;
 
     public ItemKey lastOpenItem;
 
@@ -55,18 +56,22 @@ public class PlasmidManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
             
-            slot1.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot1.gameObject.SetActive(false);
             slot1.name = "slotEmpty";
-            slot2.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot2.gameObject.SetActive(false);
             slot2.name = "slotEmpty";
-            slot3.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot3.gameObject.SetActive(false);
             slot3.name = "slotEmpty";
-            slot4.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot4.gameObject.SetActive(false);
             slot4.name = "slotEmpty";
-            slot5.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot5.gameObject.SetActive(false);
             slot5.name = "slotEmpty";
-            slot6.image.sprite = Resources.Load<Sprite>("items/empty");
+            slot6.gameObject.SetActive(false);
             slot6.name = "slotEmpty";
+            terminator1.SetActive(false);
+            terminator2.SetActive(false);
+            terminator3.SetActive(false);
+            terminator4.SetActive(false);
             
             int slotsUnlocked = 0;
             
@@ -80,32 +85,38 @@ public class PlasmidManager : MonoBehaviour
                     {
                         slot1.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
                         slot1.name = _item.id.Item1 + "_" + _item.id.Item2;
+                        slot1.gameObject.SetActive(true);
                     }
                     else if (_item.equipedSlot == 2)
                     {
                         slot2.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
                         slot2.name = _item.id.Item1 + "_" + _item.id.Item2;
                         slotsUnlocked = ((PromoterItem)Items.items[_item.id]).slotsUnlocked;
+                        slot2.gameObject.SetActive(true);
                     }
                     else if (_item.equipedSlot == 3)
                     {
-                        slot3.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot3.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath + "_e");
                         slot3.name = _item.id.Item1 + "_" + _item.id.Item2;
+                        slot3.gameObject.SetActive(true);
                     }
                     else if (_item.equipedSlot == 4)
                     {
-                        slot4.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot4.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath + "_e");
                         slot4.name = _item.id.Item1 + "_" + _item.id.Item2;
+                        slot4.gameObject.SetActive(true);
                     }
                     else if (_item.equipedSlot == 5)
                     {
-                        slot5.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot5.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath + "_e");
                         slot5.name = _item.id.Item1 + "_" + _item.id.Item2;
+                        slot5.gameObject.SetActive(true);
                     }
                     else if (_item.equipedSlot == 6)
                     {
-                        slot6.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                        slot6.image.sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath + "_e");
                         slot6.name = _item.id.Item1 + "_" + _item.id.Item2;
+                        slot6.gameObject.SetActive(true);
                     }
                 }
                 else
@@ -114,41 +125,45 @@ public class PlasmidManager : MonoBehaviour
 
                     newItem.name = _item.id.Item1 + "_" + _item.id.Item2;
                     newItem.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(Items.items[_item.id].iconPath);
+                    TMP_Text text = newItem.transform.Find("Perk/perkText").GetComponent<TMP_Text>();
+                    Image image = newItem.transform.Find("Perk/perkImage").GetComponent<Image>();
+                    
+                    
+                    if (Items.items[_item.id].type == ItemType.Promoter)
+                    {
+                        text.text = "+" + ((PromoterItem)Items.items[_item.id]).slotsUnlocked;
+                        image.sprite = Resources.Load<Sprite>(((PromoterItem)Items.items[_item.id]).boostIconPath);
+                        image.transform.localScale = new Vector3(0.04f, 0.04f, 0.04f);
+                    }
+                    else if (Items.items[_item.id].type == ItemType.Ori)
+                    {
+                        text.text = "X" + ((OriItem)Items.items[_item.id]).multiplier;
+                        text.transform.localPosition = new Vector3(0, -7, 0);
+                        image.gameObject.SetActive(false);
+                    } 
+                    else
+                    {
+                        text.text = "+" + ((GeneItem)Items.items[_item.id]).boost;
+                        image.sprite = Resources.Load<Sprite>(((GeneItem)Items.items[_item.id]).boostIconPath);
+                    }
                 }
             }
 
-            if (slotsUnlocked < 4)
+            if (slotsUnlocked == 4)
             {
-                slot6.interactable = false;
+                terminator4.SetActive(true);
             }
-            if (slotsUnlocked < 3)
+            if (slotsUnlocked == 3)
             {
-                slot5.interactable = false;
+                terminator3.SetActive(true);
             }
-            if (slotsUnlocked < 2)
+            if (slotsUnlocked == 2)
             {
-                slot4.interactable = false;
+                terminator2.SetActive(true);
             }
-            if (slotsUnlocked < 1)
+            if (slotsUnlocked == 1)
             {
-                slot3.interactable = false;
-            }
-
-            if (slotsUnlocked > 0)
-            {
-                slot3.interactable = true;
-            }
-            if (slotsUnlocked > 1)
-            {
-                slot4.interactable = true;
-            }
-            if (slotsUnlocked > 2)
-            {
-                slot5.interactable = true;
-            }
-            if (slotsUnlocked > 3)
-            {
-                slot6.interactable = true;
+                terminator1.SetActive(true);
             }
         }
     }
@@ -183,17 +198,24 @@ public class PlasmidManager : MonoBehaviour
 
         if (_item.type == ItemType.Promoter)
         {
-            perkIcon.sprite = Resources.Load<Sprite>("items/perks/promoter");
+            perkIcon.gameObject.SetActive(true);
+            perkIcon.sprite = Resources.Load<Sprite>(((PromoterItem)_item).boostIconPath);
+            perkIcon.transform.localScale = new Vector3(1f, 1f, 1f);
+            perkBonus.text = "+" + ((PromoterItem)_item).slotsUnlocked;
             perkDescription.text = "Unlocks " + ((PromoterItem)_item).slotsUnlocked + " extra gene slots";
         }
         else if (_item.type == ItemType.Ori)
         {
-            perkIcon.sprite = Resources.Load<Sprite>("items/perks/ori");
+            perkIcon.gameObject.SetActive(false);
+            perkBonus.text = "X" + ((OriItem)_item).multiplier;
             perkDescription.text = "Multiplies all genes bonus by " + ((OriItem)_item).multiplier;
         } 
         else
         {
-            perkIcon.sprite = Resources.Load<Sprite>("items/perks/gene" + "_" + ((GeneItem)_item).attribute.ToString().ToLower());
+            perkIcon.gameObject.SetActive(true);
+            perkIcon.sprite = Resources.Load<Sprite>(((GeneItem)_item).boostIconPath);
+            perkIcon.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+            perkBonus.text = "+" + ((GeneItem)_item).boost;
             perkDescription.text = "Increases " + ((GeneItem)_item).attribute + " by " + ((GeneItem)_item).boost;
         }
 

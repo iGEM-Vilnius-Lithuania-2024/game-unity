@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -74,7 +75,7 @@ public class PlasmidManager : MonoBehaviour
             terminator4.SetActive(false);
             
             int slotsUnlocked = 0;
-            
+             
             player.items = player.items.OrderByDescending(item => item.id.Item2).ToList();
             
             foreach (ItemKey _item in player.items)
@@ -387,6 +388,11 @@ public class PlasmidManager : MonoBehaviour
             }
         }
 
+        equipSlot4.interactable = true;
+        equipSlot3.interactable = true;
+        equipSlot2.interactable = true;
+        equipSlot1.interactable = true;
+        
         if (equippedPromoterSlotsUnlocked < 4)
         {
             equipSlot4.interactable = false;

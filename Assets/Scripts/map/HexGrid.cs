@@ -41,9 +41,9 @@ public class HexGrid : MonoBehaviour
             Vector2d centralHexLocation =
                 new Vector2d(Math.Round(location.x / 2, 3) * 2, Math.Round(location.y / 3, 3) * 3);
 
-            for (int i = -10; i < 10; i++)
+            for (int i = -20; i < 20; i++)
             {
-                for (int j = -10; j < 10; j++)
+                for (int j = -20; j < 20; j++)
                 {
                     Vector2d newHexLocation = new Vector2d(centralHexLocation.x + 0.002 * i, centralHexLocation.y + 0.003 * j);
                     if (Math.Abs(j) % 2 == 0)

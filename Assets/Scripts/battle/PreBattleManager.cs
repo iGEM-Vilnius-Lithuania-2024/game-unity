@@ -56,6 +56,8 @@ public class PreBattleManager : MonoBehaviour
     private void ARPlaceObject(GameObject objectToSpawn)
     {
         _spawnedObject = Instantiate(objectToSpawn, _placementPose.position, _placementPose.rotation);
+        Vector3 scale = _spawnedObject.transform.localScale;
+        _spawnedObject.transform.localScale = new Vector3(scale.x * 0.02f, scale.y * 0.02f, scale.z * 0.02f);
     }
 
     

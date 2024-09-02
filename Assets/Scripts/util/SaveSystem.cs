@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Mapbox.Utils;
 using UnityEngine;
 using Mapbox.Json;
+using Unity.VisualScripting;
 
 public static class SaveSystem
 {
@@ -109,5 +110,48 @@ public static class SaveSystem
         }
         
         return new CollectionSave();
+    }
+    
+    public static void CloseTip(int id)
+    {
+        TipsInfo tipsInfo = LoadTips();
+        if (!tipsInfo.ids.Contains(id))
+        {
+            tipsInfo.ids.Add(id);
+            SaveTips(tipsInfo);
+        }
+    }
+    
+    public static Boolean IsTipOpen(int id)
+    {
+        TipsInfo tipsInfo = LoadTips();
+        return !tipsInfo.ids.Contains(id);
+    }
+    
+    public static void SaveTips(TipsInfo tips)
+    {
+        string path = Application.persistentDataPath + "/tipsInfo.json";
+        
+        string jsonString = JsonConvert.SerializeObject(tips);
+        
+        File.WriteAllText(path, jsonString);
+    }
+    
+    public static TipsInfo LoadTips()
+    {
+        string path = Application.persistentDataPath + "/tipsInfo.json";
+
+        if (File.Exists(path))
+        {
+            string jsonString = File.ReadAllText(path);
+
+            TipsInfo tipsInfo = JsonConvert.DeserializeObject<TipsInfo>(jsonString);
+            return tipsInfo;
+        }
+        TipsInfo newTipsInfo = new TipsInfo();
+        newTipsInfo.ids = new List<int>();
+        SaveTips(newTipsInfo);
+        
+        return newTipsInfo;
     }
 }

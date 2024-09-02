@@ -16,7 +16,7 @@ public class CaptureClassifier : MonoBehaviour
     public Button scanButton;
     public GameObject spinner;
 
-    private readonly int WIDTH = 224;
+    private readonly int WIDTH = 512;
     private Camera _camera;
     
     private bool _takeScreenshotOnNextFrame;
@@ -84,7 +84,7 @@ public class CaptureClassifier : MonoBehaviour
                     string lowerCaseSurface = surface.ToString().ToLower();
                     if (result.Contains(lowerCaseSurface))
                     {
-                        MainManager.Instance.detectedSurface = Surface.Animal;
+                        MainManager.Instance.detectedSurface = surface;
                         SceneManager.LoadSceneAsync(2);
                     }
                 }

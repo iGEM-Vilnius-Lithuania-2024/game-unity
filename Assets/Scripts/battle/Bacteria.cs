@@ -100,7 +100,7 @@ public class Bacteria : MonoBehaviour
         }
         
         battleManager.damageSound.Play();
-        //player.TakeDamage(damage);
+        player.TakeDamage(damage);
         float elapsed2 = 0.0f;
 
         while (elapsed2 < attackDuration)

@@ -15,6 +15,7 @@ public class HexReplacer : MonoBehaviour
     private List<DateTime> scanTimes = new List<DateTime>();
     private bool isInitialized = false;
     private TimeSpan cooldownTime;
+    private List<Vector3> replacedHexes = new List<Vector3>();
 
     void Start()
     {
@@ -78,7 +79,7 @@ public class HexReplacer : MonoBehaviour
             }
         }
 
-        if (closestHex != null && replacementPrefab != null)
+        if (closestHex != null && replacementPrefab != null && !replacedHexes.Contains(closestHex.transform.position))
         {
             Timer timer = replacementPrefab.GetComponent<Timer>();
             TimeSpan elapsedTime = DateTime.Now - scanTime;
@@ -91,6 +92,7 @@ public class HexReplacer : MonoBehaviour
             if (timeRemaining >= 0)
             {
                 Vector3 position = closestHex.transform.position;
+                replacedHexes.Add(position);
                 Quaternion rotation = closestHex.transform.rotation;
                 GameObject hexInstance = Instantiate(replacementPrefab, position, rotation);
                 hexInstance.tag = "cooldown-hex";

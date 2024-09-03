@@ -287,11 +287,6 @@ public class PlasmidManager : MonoBehaviour
             return;
         }
 
-        if (slot == 3 && !slot3.interactable || slot == 4 && !slot4.interactable || slot == 5 && !slot5.interactable || slot == 6 && !slot6.interactable)
-        {
-            return; //TODO: Show info message
-        }
-
         bool isEquipped = false;
         bool isUnEquipped = false;
         foreach (var item in player.items)
@@ -306,7 +301,7 @@ public class PlasmidManager : MonoBehaviour
                     previousSlotsUnlocked = ((PromoterItem)Items.items[item.id]).slotsUnlocked;
                 }
             }
-            if (item.id.Equals(lastOpenItem.id) && !isEquipped)
+            if (item.id.Equals(lastOpenItem.id) && !item.isEquipped && !isEquipped)
             {
                 item.isEquipped = true;
                 item.equipedSlot = equipSlot;
@@ -359,6 +354,7 @@ public class PlasmidManager : MonoBehaviour
             {
                 item.isEquipped = false;
                 item.equipedSlot = -1;
+                break;
             }
         }
 
@@ -380,13 +376,13 @@ public class PlasmidManager : MonoBehaviour
         
         Tuple<int, int> newId = new Tuple<int, int>(lastOpenItem.id.Item1, lastOpenItem.id.Item2 + 1);
         
-        player.items.Add(new ItemKey(newId, lastOpenItem.isEquipped, lastOpenItem.equipedSlot));
+        player.items.Add(new ItemKey(newId, false, -1));
         UpdateUI();
         CloseItemDescription();
 
         GameObject newItem = new GameObject();
         newItem.name = newId.Item1 + "_" + newId.Item2;
-        OpenItemDescription(newItem, lastOpenItem.isEquipped, lastOpenItem.equipedSlot);
+        OpenItemDescription(newItem, false, -1);
         newItem.Destroy();
     }
 

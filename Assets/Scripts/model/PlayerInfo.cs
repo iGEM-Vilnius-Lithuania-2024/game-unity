@@ -21,8 +21,9 @@ public class PlayerInfo
         currentHealth = 100;
         items = new List<ItemKey>
         {
-            new ItemKey(new Tuple<int, int>(0, 0), true, 1), 
-            new ItemKey(new Tuple<int, int>(1, 0), true, 2)
+            new ItemKey(new Tuple<int, int>(0, 0), false, -1), 
+            new ItemKey(new Tuple<int, int>(1, 0), false, -1),
+            new ItemKey(new Tuple<int, int>(2, 0), false, -1)
         };
         
         return this;

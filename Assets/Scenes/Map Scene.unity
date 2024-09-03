@@ -4238,13 +4238,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1727657514}
     m_Modifications:
+    - target: {fileID: 5706284448273003524, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5890399942845738287, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_text
-      value: Welcome to the world of microorganisms and synthetic biology. In the
-        game you are given your own bacterium, which you can grow stronger by equiping
-        different genes. Take a photo of a surface, discover what bacteria lives
-        there and fight it for better genes! Be cautions, game contains some fantasy
-        elements.
+      value: 'Welcome to the World of microorganisms and synthetic biology! You will
+        start the game with a basic bacterium. You will evolve it by adding different
+        genetic traits. Your mission: to seek out bacteria by scanning surfaces,
+        conquer them, and steal their best genes to improve your own. *Be aware that
+        the game contains some fantasy elements.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 34.870003
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -272.565
       objectReference: {fileID: 0}
     - target: {fileID: 7551300154846354048, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_Pivot.x
@@ -4325,6 +4353,30 @@ PrefabInstance:
     - target: {fileID: 7551300154846354048, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 245.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -132.565
       objectReference: {fileID: 0}
     - target: {fileID: 8428173865439819973, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_Name

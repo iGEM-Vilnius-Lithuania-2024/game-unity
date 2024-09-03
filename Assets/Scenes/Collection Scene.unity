@@ -3042,8 +3042,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5890399942845738287, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_text
-      value: Here you can see your collection of discovered bacteria. Explore different
-        surfaces to discover more bacteria.
+      value: Your collection of discovered bacteria. Explore different surfaces for
+        more.
       objectReference: {fileID: 0}
     - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3059,7 +3059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 38.46
+      value: 42.66
       objectReference: {fileID: 0}
     - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3067,7 +3067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6472915894934376694, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -130.77
+      value: -118.67
       objectReference: {fileID: 0}
     - target: {fileID: 7551300154846354048, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_Pivot.x
@@ -3163,7 +3163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 101.54
+      value: 87.34
       objectReference: {fileID: 0}
     - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3171,7 +3171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8021109167755587698, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -60.77
+      value: -53.67
       objectReference: {fileID: 0}
     - target: {fileID: 8428173865439819973, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_Name
@@ -3179,7 +3179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8854103831845416319, guid: 81961f678d4fa4a59a430aba1411a0c0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 160
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -37,6 +37,10 @@ public class PlasmidManager : MonoBehaviour
     public GameObject terminator2;
     public GameObject terminator3;
     public GameObject terminator4;
+    public TipWithTrigger tipGene;
+    public TipWithTrigger tipOri;
+    public TipWithTrigger tipPromoter;
+    public EndlessTip tipEquipPromoter;
 
     public ItemKey lastOpenItem;
 
@@ -177,6 +181,18 @@ public class PlasmidManager : MonoBehaviour
         }
         int id1 = Int32.Parse(item.name.Split('_')[0]); 
         int id2 = Int32.Parse(item.name.Split('_')[1]);
+        if (id1 == 0)
+        {
+            tipOri.TriggerTip();
+        }
+        else if(id1 == 1)
+        {
+            tipPromoter.TriggerTip();
+        }
+        else
+        {
+            tipGene.TriggerTip();
+        }
         Item _item = Items.items[new Tuple<int, int>(id1, id2)];
         lastOpenItem = new ItemKey(new Tuple<int, int>(id1, id2), isEquiped, equipSlot);
         
@@ -376,38 +392,57 @@ public class PlasmidManager : MonoBehaviour
 
     public void OpenGeneSlotEquipPopUp()
     {
-        geneSlotEquipPopup.SetActive(true);
-
-        int equippedPromoterSlotsUnlocked = 0;
+        Boolean isPromoterEquiped = false;
         foreach (var item in player.items)
         {
-            if (item.equipedSlot == 2)
+            if (item.id.Item1 == 1 && item.isEquipped)
             {
-                equippedPromoterSlotsUnlocked = ((PromoterItem)Items.items[item.id]).slotsUnlocked;
-                break;
+                isPromoterEquiped = true;
             }
         }
 
-        equipSlot4.interactable = true;
-        equipSlot3.interactable = true;
-        equipSlot2.interactable = true;
-        equipSlot1.interactable = true;
-        
-        if (equippedPromoterSlotsUnlocked < 4)
+        if (isPromoterEquiped)
         {
-            equipSlot4.interactable = false;
+            geneSlotEquipPopup.SetActive(true);
+
+            int equippedPromoterSlotsUnlocked = 0;
+            foreach (var item in player.items)
+            {
+                if (item.equipedSlot == 2)
+                {
+                    equippedPromoterSlotsUnlocked = ((PromoterItem)Items.items[item.id]).slotsUnlocked;
+                    break;
+                }
+            }
+
+            equipSlot4.interactable = true;
+            equipSlot3.interactable = true;
+            equipSlot2.interactable = true;
+            equipSlot1.interactable = true;
+
+            if (equippedPromoterSlotsUnlocked < 4)
+            {
+                equipSlot4.interactable = false;
+            }
+
+            if (equippedPromoterSlotsUnlocked < 3)
+            {
+                equipSlot3.interactable = false;
+            }
+
+            if (equippedPromoterSlotsUnlocked < 2)
+            {
+                equipSlot2.interactable = false;
+            }
+
+            if (equippedPromoterSlotsUnlocked < 1)
+            {
+                equipSlot1.interactable = false;
+            }
         }
-        if (equippedPromoterSlotsUnlocked < 3)
+        else
         {
-            equipSlot3.interactable = false;
-        }
-        if (equippedPromoterSlotsUnlocked < 2)
-        {
-            equipSlot2.interactable = false;
-        }
-        if (equippedPromoterSlotsUnlocked < 1)
-        {
-            equipSlot1.interactable = false;
+            tipEquipPromoter.TriggerTip();
         }
     }
     

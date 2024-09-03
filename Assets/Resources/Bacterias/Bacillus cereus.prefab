@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6706044790551923055}
   - component: {fileID: 8859811357934239141}
   m_Layer: 0
-  m_Name: Bacillus cereus
+  m_Name: Bacillus Cereus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

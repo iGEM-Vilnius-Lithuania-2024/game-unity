@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using bacteria;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,7 +72,8 @@ public class BacteriaDescription : MonoBehaviour
         bacteriaCamera.targetTexture = renderTexture;
 
         currentBacteriaModel = Instantiate(bacteriaPrefab, bacteriaCamera.transform.position + bacteriaCamera.transform.forward * 5f, Quaternion.identity);
-        currentBacteriaModel.transform.localScale /= 14;
+        currentBacteriaModel.transform.position = new Vector3(currentBacteriaModel.transform.position.x, currentBacteriaModel.transform.position.y - 0.75f, currentBacteriaModel.transform.position.z);
+        currentBacteriaModel.transform.localScale /= 12;
         bacteriaCamera.Render();
         
         RawImage rawImage = uiPrefabInstance.GetComponentInChildren<RawImage>();

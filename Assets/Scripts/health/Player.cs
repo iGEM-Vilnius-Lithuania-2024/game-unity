@@ -18,12 +18,10 @@ public class Player : MonoBehaviour
     
     public GameObject damagePopup;
     public HealthBar healthBar;
-    public TMP_Text HP;
-    public TMP_Text ATK;
+    public TextMeshProUGUI HP;
+    public TextMeshProUGUI ATK;
+    public TextMeshProUGUI REG;
     public BattleManager battleManager;
-    
-    private float saveInterval = 60f;
-    private float saveTimer;
     private GameObject lose;
     void Start()
     {
@@ -44,16 +42,15 @@ public class Player : MonoBehaviour
             HP.text = ((int) Math.Round(maxHealth, 0)).ToString();
             ATK.text = ((int) Math.Round(attackDamage, 0)).ToString();
         }
-        
-        saveTimer = saveInterval;
     }
     
     void Update()
     {
         if (HP != null && ATK != null)
         {
-            HP.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(maxHealth, 0)).ToString();
-            ATK.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ((int) Math.Round(attackDamage, 0)).ToString();
+            HP.text = ((int) Math.Round(maxHealth, 0)).ToString();
+            ATK.text = ((int) Math.Round(attackDamage, 0)).ToString();
+            REG.text = ((int) Math.Round(pointIncreasePerMinute, 0)).ToString();
         }
         
         currentHealth += pointIncreasePerMinute * (Time.deltaTime / 60);

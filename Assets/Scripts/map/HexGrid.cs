@@ -41,9 +41,9 @@ public class HexGrid : MonoBehaviour
             Vector2d centralHexLocation =
                 new Vector2d(Math.Round(location.x / 2, 3) * 2, Math.Round(location.y / 3, 3) * 3);
 
-            for (int i = -20; i < 20; i++)
+            for (int i = -30; i < 30; i++)
             {
-                for (int j = -20; j < 20; j++)
+                for (int j = -30; j < 30; j++)
                 {
                     Vector2d newHexLocation = new Vector2d(centralHexLocation.x + 0.002 * i, centralHexLocation.y + 0.003 * j);
                     if (Math.Abs(j) % 2 == 0)
@@ -55,7 +55,7 @@ public class HexGrid : MonoBehaviour
                     hexInstance.tag = "hex";
                 }
             }
-            _gridSpawned = true;
+            _gridSpawned = true; 
         }
     }
 }

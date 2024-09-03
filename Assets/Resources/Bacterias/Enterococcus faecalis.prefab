@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5729131637022069341}
   - component: {fileID: 7522420501889148567}
   m_Layer: 0
-  m_Name: Enterococcus faecalis
+  m_Name: Enterococcus Faecalis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

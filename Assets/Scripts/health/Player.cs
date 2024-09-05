@@ -37,10 +37,11 @@ public class Player : MonoBehaviour
             healthBar.SetHealth(currentHealth);
         }
         
-        if (HP != null && ATK != null)
+        if (HP != null && ATK != null && REG != null)
         {
             HP.text = ((int) Math.Round(maxHealth, 0)).ToString();
             ATK.text = ((int) Math.Round(attackDamage, 0)).ToString();
+            REG.text = ((int) Math.Round(pointIncreasePerMinute, 0)).ToString();
         }
     }
     

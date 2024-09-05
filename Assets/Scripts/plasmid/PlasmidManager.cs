@@ -369,6 +369,17 @@ public class PlasmidManager : MonoBehaviour
         {
             if (player.items[i].id.Equals(lastOpenItem.id) && count > 0)
             {
+                if (player.items[i].equipedSlot == 2)
+                {
+                    foreach (var item in player.items)
+                    {
+                        if (item.equipedSlot == 3 || item.equipedSlot == 4 || item.equipedSlot == 5 || item.equipedSlot == 6)
+                        {
+                            item.isEquipped = false;
+                            item.equipedSlot = -1;
+                        }
+                    }
+                }
                 count--;
                 player.items.RemoveAt(i);
             }

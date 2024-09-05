@@ -44,8 +44,8 @@ public class PreBattleManager : MonoBehaviour
         var screenCenter = _camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
 
         int gridResolution = 5;
-        float gridStepX = (float) Screen.width / (gridResolution * 2);
-        float gridStepY = (float) Screen.height / (gridResolution * 2);
+        float gridStepX = (float) Screen.width / (gridResolution * 4);
+        float gridStepY = (float) Screen.height / (gridResolution * 4);
 
         var hits = new List<ARRaycastHit>();
 

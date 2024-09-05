@@ -38,18 +38,37 @@ public class PreBattleManager : MonoBehaviour
             SpawnObject();
         }
     }
-
+    
     private void UpdatePlacementPose()
     {
         var screenCenter = _camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
-        var hits = new List<ARRaycastHit>();
-        _arRaycastManager.Raycast(screenCenter, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
 
-        _placementPoseIsValid = hits.Count > 0;
-        if (_placementPoseIsValid)
+        int gridResolution = 5;
+        float gridStepX = (float) Screen.width / (gridResolution * 4);
+        float gridStepY = (float) Screen.height / (gridResolution * 4);
+
+        var hits = new List<ARRaycastHit>();
+
+        for (int x = -gridResolution; x <= gridResolution; x++)
         {
-            _placementPose = hits[0].pose;
+            for (int y = -gridResolution; y <= gridResolution; y++)
+            {
+                var offset = new Vector3(x * gridStepX, y * gridStepY, 0);
+                var screenPoint = screenCenter + offset;
+
+                if (_arRaycastManager.Raycast(screenPoint, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes))
+                {
+                    if (hits.Count > 0)
+                    {
+                        _placementPoseIsValid = true;
+                        _placementPose = hits[0].pose;
+                        return;
+                    }
+                }
+            }
         }
+
+        _placementPoseIsValid = false;
     }
 
     

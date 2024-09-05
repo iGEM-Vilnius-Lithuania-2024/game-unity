@@ -24,6 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Collection Scene.unity
     guid: 6c9f2498e79a24b5181942cc38438188
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 843ec174f8c7e44b6928f672a2be42e0, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 66687f5e3206546b589deee60bc36a7c, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: f28fc99d6f36e4296825f146b9d30e8f, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: a3096c86bc0c2496a999706a435817b7, type: 2}

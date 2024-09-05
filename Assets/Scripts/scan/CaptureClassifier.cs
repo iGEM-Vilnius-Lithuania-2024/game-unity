@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 

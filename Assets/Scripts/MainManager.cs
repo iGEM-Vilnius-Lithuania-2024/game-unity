@@ -1,6 +1,7 @@
 using System.Collections;
 using bacteria;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
@@ -53,6 +54,7 @@ public class MainManager : MonoBehaviour
 
     private void OnStart()
     {
+        
         PlayMusic(mainMusic);
     }
     

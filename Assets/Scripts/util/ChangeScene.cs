@@ -95,7 +95,7 @@ public class ChangeScene : MonoBehaviour
         foreach (GameObject cooldownHex in cooldownHexes)
         {
             float distance = Vector3.Distance(locationIG, cooldownHex.transform.position);
-            if (distance < 32f)
+            if (distance < 37f)
             {
                 return true;
             }

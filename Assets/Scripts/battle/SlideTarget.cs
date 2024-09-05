@@ -62,6 +62,7 @@ public class SlideTarget : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            duration = Random.Range(1f, 3.0f);
             isVerticalMovement = !isVerticalMovement;
             elapsedTime = (isVerticalMovement ? duration : horizontalDuration) * (1 - elapsedTime / (isVerticalMovement ? duration : horizontalDuration));
             if (!isVerticalMovement)

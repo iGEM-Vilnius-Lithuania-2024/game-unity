@@ -162,7 +162,15 @@ public class BattleManager : MonoBehaviour
         player.giveItem(newItem);
         reward.sprite = Resources.Load<Sprite>(Items.items[newItem.id].iconPath);
         Item item = Items.items[newItem.id];
-        rewardTitle.text = item.name;
+        int index = item.name.IndexOf('(');
+        if (index != -1)
+        {
+            rewardTitle.text = item.name.Substring(0, index);
+        }
+        else
+        {
+            rewardTitle.text = item.name;
+        }
         if (item.type == ItemType.Promoter)
         {
             perkIcon.gameObject.SetActive(true);

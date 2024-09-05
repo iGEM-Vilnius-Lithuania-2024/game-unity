@@ -17,7 +17,11 @@ public class BattleManager : MonoBehaviour
     public GameObject battleBacteriaCanvas;
     
     public GameObject victoryPopup;
+    public TMP_Text rewardTitle;
     public Image reward;
+    public Image perkIcon;
+    public TMP_Text perkBonus;
+    public TMP_Text perkDescription;
     public GameObject defeatPopup;
 
     public AudioSource damageSound;
@@ -157,5 +161,29 @@ public class BattleManager : MonoBehaviour
         ItemKey newItem = new ItemKey(new Tuple<int, int>(itemType, rarity), false, -1);
         player.giveItem(newItem);
         reward.sprite = Resources.Load<Sprite>(Items.items[newItem.id].iconPath);
+        Item item = Items.items[newItem.id];
+        rewardTitle.text = item.name;
+        if (item.type == ItemType.Promoter)
+        {
+            perkIcon.gameObject.SetActive(true);
+            perkIcon.sprite = Resources.Load<Sprite>(((PromoterItem)item).boostIconPath);
+            perkIcon.transform.localScale = new Vector3(1f, 1f, 1f);
+            perkBonus.text = "+" + ((PromoterItem)item).slotsUnlocked;
+            perkDescription.text = "Unlocks " + ((PromoterItem)item).slotsUnlocked + " extra gene slots";
+        }
+        else if (item.type == ItemType.Ori)
+        {
+            perkIcon.gameObject.SetActive(false);
+            perkBonus.text = "X" + ((OriItem)item).multiplier;
+            perkDescription.text = "Multiplies all genes bonus by " + ((OriItem)item).multiplier;
+        } 
+        else
+        {
+            perkIcon.gameObject.SetActive(true);
+            perkIcon.sprite = Resources.Load<Sprite>(((GeneItem)item).boostIconPath);
+            perkIcon.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+            perkBonus.text = "+" + ((GeneItem)item).boost;
+            perkDescription.text = "Increases " + ((GeneItem)item).attribute + " by " + ((GeneItem)item).boost;
+        }
     }
 }

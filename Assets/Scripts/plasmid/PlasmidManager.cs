@@ -19,6 +19,7 @@ public class PlasmidManager : MonoBehaviour
     public Button equipSlot4;
     public TMP_Text itemTypeText;
     public TMP_Text itemDescriptionText;
+    public TMP_Text whatIs;
     public GameObject equipButton;
     public GameObject unequipButton;
     public Button mergeButton;
@@ -40,6 +41,9 @@ public class PlasmidManager : MonoBehaviour
     public TipWithTrigger tipGene;
     public TipWithTrigger tipOri;
     public TipWithTrigger tipPromoter;
+    public EndlessTip TipGeneEndlessTip;
+    public EndlessTip TipOriEndlessTip;
+    public EndlessTip TipPromoterEndlessTip;
     public EndlessTip tipEquipPromoter;
 
     public ItemKey lastOpenItem;
@@ -220,12 +224,14 @@ public class PlasmidManager : MonoBehaviour
             perkIcon.transform.localScale = new Vector3(1f, 1f, 1f);
             perkBonus.text = "+" + ((PromoterItem)_item).slotsUnlocked;
             perkDescription.text = "Unlocks " + ((PromoterItem)_item).slotsUnlocked + " extra gene slots";
+            whatIs.text = "What is a promoter?";
         }
         else if (_item.type == ItemType.Ori)
         {
             perkIcon.gameObject.SetActive(false);
             perkBonus.text = "X" + ((OriItem)_item).multiplier;
             perkDescription.text = "Multiplies all genes bonus by " + ((OriItem)_item).multiplier;
+            whatIs.text = "What is an ori?";
         } 
         else
         {
@@ -234,7 +240,10 @@ public class PlasmidManager : MonoBehaviour
             perkIcon.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
             perkBonus.text = "+" + ((GeneItem)_item).boost;
             perkDescription.text = "Increases " + ((GeneItem)_item).attribute + " by " + ((GeneItem)_item).boost;
+            whatIs.text = "What is a gene?";
         }
+        
+        mergeButton.gameObject.SetActive(true);
 
         if (lastOpenItem.id.Item2 < 3)
         {
@@ -456,5 +465,22 @@ public class PlasmidManager : MonoBehaviour
     public void CloseGeneSlotEquipPopUp()
     {
         geneSlotEquipPopup.SetActive(false);
+    }
+    
+    public void OpenTip()
+    {
+        Item item = Items.items[lastOpenItem.id];
+        if (item.type == ItemType.Ori)
+        {
+            TipOriEndlessTip.TriggerTip();
+        }
+        else if (item.type == ItemType.Promoter)
+        {
+            TipPromoterEndlessTip.TriggerTip();
+        }
+        else
+        {
+            TipGeneEndlessTip.TriggerTip();
+        }
     }
 }

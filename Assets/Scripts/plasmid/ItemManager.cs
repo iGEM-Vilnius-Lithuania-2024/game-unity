@@ -3,6 +3,10 @@
 public class ItemManager : MonoBehaviour
 {
     public GameObject item;
+    public EndlessTip TipATK;
+    public EndlessTip TipHP;
+    public EndlessTip TipREG;
+    
     private PlasmidManager plasmidManager;
     
     void Start()
@@ -43,5 +47,25 @@ public class ItemManager : MonoBehaviour
     public void CloseGeneSlotEquipPopUp()
     {
         plasmidManager.CloseGeneSlotEquipPopUp();
+    }
+
+    public void OpenTip()
+    {
+        plasmidManager.OpenTip();
+    }
+    
+    public void OpenTipATK()
+    {
+        TipATK.TriggerTip();
+    }
+    
+    public void OpenTipHP()
+    {
+        TipHP.TriggerTip();
+    }
+    
+    public void OpenTipREG()
+    {
+        TipREG.TriggerTip();
     }
 }

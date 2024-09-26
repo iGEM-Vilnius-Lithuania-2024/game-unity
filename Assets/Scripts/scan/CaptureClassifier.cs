@@ -4,7 +4,6 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -16,8 +15,8 @@ public class CaptureClassifier : MonoBehaviour
     public Button scanButton;
     public GameObject spinner;
 
-    private readonly int WIDTH = 512;
-    private Camera _camera;   
+    private readonly int WIDTH = 400;
+    private Camera _camera;
     private string url = "https://209.38.177.166";
     
     private bool _takeScreenshotOnNextFrame;
@@ -57,6 +56,7 @@ public class CaptureClassifier : MonoBehaviour
         {
             _camera.targetTexture = RenderTexture.GetTemporary(WIDTH, WIDTH, 100);
             _takeScreenshotOnNextFrame = true;
+            scanButton.gameObject.SetActive(false);
         }
     }
 
@@ -71,24 +71,38 @@ public class CaptureClassifier : MonoBehaviour
 
         using (HttpClient client = new HttpClient(handler))
         {
+            client.Timeout = TimeSpan.FromSeconds(7);
+
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Content = new ByteArrayContent(data);
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
 
-            HttpResponseMessage response = await client.SendAsync(request);
-            
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string result = await response.Content.ReadAsStringAsync();
-                foreach (Surface surface in Enum.GetValues(typeof(Surface)))
+                HttpResponseMessage response = await client.SendAsync(request);
+            
+                if (response.IsSuccessStatusCode)
                 {
-                    string lowerCaseSurface = surface.ToString().ToLower();
-                    if (result.Contains(lowerCaseSurface))
+                    string result = await response.Content.ReadAsStringAsync();
+                    foreach (Surface surface in Enum.GetValues(typeof(Surface)))
                     {
-                        MainManager.Instance.detectedSurface = surface;
-                        SceneManager.LoadSceneAsync(2);
+                        string lowerCaseSurface = surface.ToString().ToLower();
+                        if (result.Contains(lowerCaseSurface))
+                        {
+                            MainManager.Instance.detectedSurface = surface;
+                            SceneManager.LoadSceneAsync(2);
+                            return;
+                        }
                     }
                 }
+            }
+            catch (TaskCanceledException)
+            {
+                Surface randomSurface = (Surface)Enum.GetValues(typeof(Surface))
+                    .GetValue(new System.Random().Next(Enum.GetValues(typeof(Surface)).Length));
+
+                MainManager.Instance.detectedSurface = randomSurface;
+                SceneManager.LoadSceneAsync(2);
             }
         }
     }

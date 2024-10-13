@@ -11,6 +11,7 @@ public class ChangeScene : MonoBehaviour
     private ILocationProvider _locationProvider;
     
     public GameObject onCooldownDialog;
+    public GameObject mapNotLoadedDialog;
 
     ILocationProvider LocationProvider
     {
@@ -55,14 +56,22 @@ public class ChangeScene : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
-            if (IsOnCooldown())
+            if (IsMapLoaded())
             {
-                MoveToScanner.canMove = false;
+                ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
+                if (IsOnCooldown())
+                {
+                    MoveToScanner.canMove = false;
+                }
+                else
+                {
+                    MoveToScanner.canMove = true;
+                }
             }
             else
             {
-                MoveToScanner.canMove = true;
+                StartCoroutine(OpenCloseDialog(mapNotLoadedDialog));
+                return;
             }
         }
         if (!MoveToScanner.canMove && sceneId == 1)
@@ -81,6 +90,16 @@ public class ChangeScene : MonoBehaviour
             ScanInfoStatic.scanPosition = LocationProvider.CurrentLocation.LatitudeLongitude;
             SceneManager.LoadSceneAsync(sceneId);
         }
+    }
+
+    private bool IsMapLoaded()
+    {
+        HexReplacer hexReplacer = GameObject.Find("HexManager").GetComponent<HexReplacer>();
+        if (!hexReplacer.IsReplaced())
+        {
+            return false;
+        }
+        return true;
     }
     
     private bool IsOnCooldown()

@@ -61,18 +61,29 @@ public class Player : MonoBehaviour
             currentHealth = maxHealth;
         }
 
-        if (currentHealth <= 0f)
+        if (currentHealth <= 0.00f)
         {
             currentHealth = 1;
             SaveSystem.SavePlayerInfo(this);
             
-            battleManager.PlayerDied();
+            StartCoroutine( battleManager.PlayerDied());
         }
 
         if (healthBar != null)
         {
             healthBar.SetHealth(currentHealth);
         }
+
+    }
+    
+    private void SavePlayerInfo()
+    {
+        SaveSystem.SavePlayerInfo(this);
+    }
+    
+    void OnApplicationQuit()
+    {
+        SavePlayerInfo();
     }
 
     public void applyPerks()

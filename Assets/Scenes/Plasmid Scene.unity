@@ -5571,6 +5571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCooldownDialog: {fileID: 1796397409}
+  mapNotLoadedDialog: {fileID: 0}
 --- !u!1 &955259610
 GameObject:
   m_ObjectHideFlags: 0
@@ -6312,6 +6313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCooldownDialog: {fileID: 0}
+  mapNotLoadedDialog: {fileID: 0}
 --- !u!114 &1147848386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7267,8 +7269,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 9.5
+  m_fontSizeBase: 9.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7611,6 +7613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCooldownDialog: {fileID: 0}
+  mapNotLoadedDialog: {fileID: 0}
 --- !u!1 &1370047017
 GameObject:
   m_ObjectHideFlags: 0
@@ -9024,6 +9027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCooldownDialog: {fileID: 0}
+  mapNotLoadedDialog: {fileID: 0}
 --- !u!1 &1569201935
 GameObject:
   m_ObjectHideFlags: 0

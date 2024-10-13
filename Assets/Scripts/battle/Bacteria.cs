@@ -5,8 +5,8 @@ public class Bacteria : MonoBehaviour
 {
     public float maxHealth = 100;
     public float currentHealth = 100;
-    public float damage = 5;
-    public float attackDuration = 0.8f; 
+    public float damage = 10;
+    public float attackDuration = 0.5f; 
     public float attackScaleFactor = 2.0f; 
     
     public Player player;
@@ -70,7 +70,7 @@ public class Bacteria : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3.5f);
             
             StartCoroutine(Attack());
         }

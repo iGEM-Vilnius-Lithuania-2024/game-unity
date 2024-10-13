@@ -16,11 +16,18 @@ public class HexReplacer : MonoBehaviour
     private bool isInitialized = false;
     private TimeSpan cooldownTime;
     private List<Vector3> replacedHexes = new List<Vector3>();
+    private bool isReplaced = false;
 
     void Start()
     {
+        isReplaced = false;
         cooldownTime = TimeSpan.FromSeconds(player.cooldown);
         StartCoroutine(InitializationRoutine());
+    }
+    
+    public bool IsReplaced()
+    {
+        return isReplaced;
     }
 
     IEnumerator InitializationRoutine()
@@ -59,6 +66,7 @@ public class HexReplacer : MonoBehaviour
             {
                 ReplaceClosestHex(positionsToReplace[i], scanTimes[i]);
             }
+            isReplaced = true;
             isInitialized = false;
         }
     }

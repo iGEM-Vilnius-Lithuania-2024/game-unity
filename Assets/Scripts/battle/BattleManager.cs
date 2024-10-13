@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -95,12 +96,22 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void PlayerDied()
+    public IEnumerator PlayerDied()
     {
+        player.currentHealth = 1;
         defeatSound.Play();
         SaveSystem.SaveScanInfo(DateTime.Now, ScanInfoStatic.scanPosition);
         
+        target.SetActive(false);
+        verticalLine.SetActive(false);
+        horizontalLine.SetActive(false);
+        targetArea.SetActive(false);
+        target.SetActive(false);
+        aim.SetActive(false);
+        canvas.GetComponentInChildren<SlideTarget>().Destroy();
+
         defeatPopup.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
         MainManager.Instance.SwitchMapScene();
     }
     

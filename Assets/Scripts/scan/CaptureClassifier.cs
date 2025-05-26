@@ -17,7 +17,7 @@ public class CaptureClassifier : MonoBehaviour
 
     private readonly int WIDTH = 400;
     private Camera _camera;
-    private string url = "https://209.38.177.166";
+    private string url = "https://159.223.243.147";
     
     private bool _takeScreenshotOnNextFrame;
 
